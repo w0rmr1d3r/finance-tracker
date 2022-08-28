@@ -11,7 +11,7 @@ def test_category_searcher_returns_na_if_category_not_found():
 
 def test_category_searcher_returns_a_category_if_category_category_for_title_exists():
     searcher = CategorySearcher()
-    result = searcher.search_category(title="NOMINA")
+    result = searcher.search_category(title="PAYCHECK_FROM_COMPANY")
     assert result == "PAYCHECK"
 
 
