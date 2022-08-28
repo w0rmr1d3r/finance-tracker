@@ -16,7 +16,10 @@ lock-refresh:
 run:
 	poetry run python3 finance_tracker/__main__.py
 
-test:
+setup-test:
+	echo '{"CATEGORIES": {"PAYCHECK":["PAYCHECK_FROM_COMPANY"]}, "POSITIVE_CATEGORIES":[]}' > load/categories/categories.json
+
+test: setup-test
 	poetry run pytest
 
 lint:
@@ -29,4 +32,4 @@ format:
 	poetry run black finance_tracker/ tests/
 
 
-.PHONY: install install-dev update lock lock-refresh run test lint format
+.PHONY: install install-dev update lock lock-refresh run setup-test test lint format
