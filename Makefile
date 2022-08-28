@@ -14,7 +14,7 @@ lock-refresh:
 	poetry lock --no-update
 
 run:
-	poetry run python3 finance-tracker/__main__.py
+	poetry run python3 finance_tracker/__main__.py
 
 test:
 	poetry run pytest
