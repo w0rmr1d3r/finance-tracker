@@ -133,4 +133,5 @@ dmypy.json
 
 # Project files and folders
 load/
-load/**
+load/categories
+load/entries_files
