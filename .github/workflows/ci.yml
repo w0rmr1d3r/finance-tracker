@@ -30,10 +30,6 @@ jobs:
         with:
           version: 1.1.13
 
-      - name: Setup test files
-        run: |
-          echo '{"CATEGORIES": {}, "POSITIVE_CATEGORIES":[]}' > load/categories/categories.json
-
       - name: Install dev dependencies
         run: make install-dev
 
