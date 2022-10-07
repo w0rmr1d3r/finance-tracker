@@ -1,0 +1,41 @@
+name: PyPI release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install and configure Poetry
+        uses: snok/install-poetry@v1
+        with:
+          version: 1.1.13
+
+      - name: Install dependencies
+        run: make install
+
+      - name: Build project
+        run: make build
+
+      - name: Publish package to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1.5
+        with:
+          user: __token__
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
+          repository_url: https://test.pypi.org/legacy/
+
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1.5
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}

@@ -2,7 +2,31 @@
 name = "finance-tracker"
 version = "0.1.0"
 description = "Python tool to track finances over a year"
+license = "MIT"
 authors = ["w0rmr1d3r"]
+readme = "README.md"
+include = ["load/**"]
+homepage = "https://github.com/w0rmr1d3r/finance-tracker"
+repository = "https://github.com/w0rmr1d3r/finance-tracker"
+documentation = "https://github.com/w0rmr1d3r/finance-tracker"
+keywords = ["finance", "tracker", "poetry"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Education",
+    "Intended Audience :: Financial and Insurance Industry",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Topic :: Office/Business",
+    "Topic :: Office/Business :: Financial",
+    "Topic :: Office/Business :: Financial :: Accounting",
+    "Typing :: Typed",
+]
 
 [tool.poetry.dependencies]
 inquirer = "^2.10.0"
