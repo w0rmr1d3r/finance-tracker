@@ -1,6 +1,6 @@
 from functools import cache
 
-from finance_tracker.categories.categories import categories_items, DEFAULT_CATEGORY
+from finance_tracker.categories.categories import DEFAULT_CATEGORY, categories_items
 from finance_tracker.printer import bcolors
 
 
