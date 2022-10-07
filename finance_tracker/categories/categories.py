@@ -1,13 +1,27 @@
 import json
 import pathlib
+from typing import Set
 
-current_path = pathlib.Path(__file__).parent.resolve()
 DEFAULT_CATEGORY = "n/a"
 
-with open(f"{current_path}/../../load/categories/categories.json") as f:
-    all_categories = json.load(f)
-    CATEGORIES_ITEMS = all_categories.get("CATEGORIES")
-    POSITIVE_CATEGORIES = set(all_categories.get("POSITIVE_CATEGORIES"))
 
-CATEGORIES = set(CATEGORIES_ITEMS.keys())
-NEGATIVE_CATEGORIES = set(CATEGORIES - POSITIVE_CATEGORIES).union({DEFAULT_CATEGORY})
+def all_categories():
+    current_path = pathlib.Path(__file__).parent.resolve()
+    with open(f"{current_path}/../../load/categories/categories.json") as f:
+        return json.load(f)
+
+
+def categories_items():
+    return all_categories().get("CATEGORIES")
+
+
+def positive_categories() -> Set:
+    return set(all_categories().get("POSITIVE_CATEGORIES"))
+
+
+def categories() -> Set:
+    return set(categories_items().keys())
+
+
+def negative_categories() -> Set:
+    return set(categories() - positive_categories()).union({DEFAULT_CATEGORY})

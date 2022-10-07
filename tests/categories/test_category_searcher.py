@@ -1,21 +1,33 @@
 import time
+from unittest.mock import MagicMock, patch
 
 from finance_tracker.categories.category_searcher import CategorySearcher
 
 
-def test_category_searcher_returns_na_if_category_not_found():
+@patch("finance_tracker.categories.categories.all_categories")
+def test_category_searcher_returns_na_if_category_not_found(patched_all_categories: MagicMock):
+    patched_all_categories.return_value = {
+        "CATEGORIES": {"PAYCHECK": ["PAYCHECK_FROM_COMPANY"]},
+        "POSITIVE_CATEGORIES": [],
+    }
     searcher = CategorySearcher()
     result = searcher.search_category(title="random")
     assert result == "n/a"
 
 
-def test_category_searcher_returns_a_category_if_category_category_for_title_exists():
+@patch("finance_tracker.categories.categories.all_categories")
+def test_category_searcher_returns_a_category_if_category_category_for_title_exists(patched_all_categories: MagicMock):
+    patched_all_categories.return_value = {
+        "CATEGORIES": {"PAYCHECK": ["PAYCHECK_FROM_COMPANY"]},
+        "POSITIVE_CATEGORIES": [],
+    }
     searcher = CategorySearcher()
     result = searcher.search_category(title="PAYCHECK_FROM_COMPANY")
     assert result == "PAYCHECK"
 
 
-def test_category_searcher_cache_works():
+@patch("finance_tracker.categories.categories.all_categories")
+def test_category_searcher_cache_works(patched_all_categories: MagicMock):
     """
     If the cache of the searcher gets deleted, this test still passes :shrug:
     It may need a better way to check it works.
@@ -23,6 +35,10 @@ def test_category_searcher_cache_works():
     by searching for a category, let's say, 500 times and see that the print/logger
     only outputs once that it hasn't found a category
     """
+    patched_all_categories.return_value = {
+        "CATEGORIES": {"PAYCHECK": ["PAYCHECK_FROM_COMPANY"]},
+        "POSITIVE_CATEGORIES": [],
+    }
     searcher = CategorySearcher()
     first_time_start = time.time()
     searcher.search_category(title="NOMINA")

@@ -4,7 +4,7 @@ import pathlib
 from pandas import DataFrame
 
 from finance_tracker.aggregators.aggregator_by_month import AggregatorByMonth
-from finance_tracker.categories.categories import NEGATIVE_CATEGORIES, POSITIVE_CATEGORIES
+from finance_tracker.categories.categories import negative_categories, positive_categories
 from finance_tracker.categories.categorizer import Categorizer
 from finance_tracker.categories.category_searcher import CategorySearcher
 from finance_tracker.printer import bcolors
@@ -37,8 +37,8 @@ def main():
     categorizer.set_category_for_entries(uncategorized_entries=entries)
 
     bcolors.print_green("Splitting categories into positive vs negative")
-    positive = [entry for entry in entries if entry.category in POSITIVE_CATEGORIES]
-    negative = [entry for entry in entries if entry.category in NEGATIVE_CATEGORIES]
+    positive = [entry for entry in entries if entry.category in positive_categories()]
+    negative = [entry for entry in entries if entry.category in negative_categories()]
 
     bcolors.print_green("Aggregating entries by month...")
     positive_categories_quantities = month_aggregator.aggregate_by_month(entries=positive)
