@@ -1,9 +1,16 @@
+from unittest.mock import MagicMock, patch
+
 from finance_tracker.categories.categorizer import Categorizer
 from finance_tracker.categories.category_searcher import CategorySearcher
 from finance_tracker.entries.entry import Entry
 
 
-def test_it_transforms_an_entry_to_a_categorized_entry():
+@patch("finance_tracker.categories.categories.all_categories")
+def test_it_transforms_an_entry_to_a_categorized_entry(patched_all_categories: MagicMock):
+    patched_all_categories.return_value = {
+        "CATEGORIES": {"PAYCHECK": ["PAYCHECK_FROM_COMPANY"]},
+        "POSITIVE_CATEGORIES": [],
+    }
     category_searcher = CategorySearcher()
     categorizer = Categorizer(category_searcher=category_searcher)
     entry = Entry(
@@ -18,7 +25,12 @@ def test_it_transforms_an_entry_to_a_categorized_entry():
     assert result.category == "n/a"
 
 
-def test_it_transforms_a_list_of_entries_to_a_list_of_categorized_entries():
+@patch("finance_tracker.categories.categories.all_categories")
+def test_it_transforms_a_list_of_entries_to_a_list_of_categorized_entries(patched_all_categories: MagicMock):
+    patched_all_categories.return_value = {
+        "CATEGORIES": {"PAYCHECK": ["PAYCHECK_FROM_COMPANY"]},
+        "POSITIVE_CATEGORIES": [],
+    }
     category_searcher = CategorySearcher()
     categorizer = Categorizer(category_searcher=category_searcher)
     entries = [
