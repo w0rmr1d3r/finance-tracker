@@ -6,11 +6,8 @@ from finance_tracker.entries.entry import Entry
 
 
 @patch("finance_tracker.categories.categories.all_categories")
-def test_it_transforms_an_entry_to_a_categorized_entry(patched_all_categories: MagicMock):
-    patched_all_categories.return_value = {
-        "CATEGORIES": {"PAYCHECK": ["PAYCHECK_FROM_COMPANY"]},
-        "POSITIVE_CATEGORIES": [],
-    }
+def test_it_transforms_an_entry_to_a_categorized_entry(patched_all_categories: MagicMock, all_categories):
+    patched_all_categories.return_value = all_categories
     category_searcher = CategorySearcher()
     categorizer = Categorizer(category_searcher=category_searcher)
     entry = Entry(
@@ -26,11 +23,10 @@ def test_it_transforms_an_entry_to_a_categorized_entry(patched_all_categories: M
 
 
 @patch("finance_tracker.categories.categories.all_categories")
-def test_it_transforms_a_list_of_entries_to_a_list_of_categorized_entries(patched_all_categories: MagicMock):
-    patched_all_categories.return_value = {
-        "CATEGORIES": {"PAYCHECK": ["PAYCHECK_FROM_COMPANY"]},
-        "POSITIVE_CATEGORIES": [],
-    }
+def test_it_transforms_a_list_of_entries_to_a_list_of_categorized_entries(
+    patched_all_categories: MagicMock, all_categories
+):
+    patched_all_categories.return_value = all_categories
     category_searcher = CategorySearcher()
     categorizer = Categorizer(category_searcher=category_searcher)
     entries = [
