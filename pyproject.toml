@@ -5,7 +5,7 @@ description = "Python tool to track finances over a year"
 license = "MIT"
 authors = ["w0rmr1d3r"]
 readme = "README.md"
-requires-python = ">=3.9"
+#requires-python = ">=3.9"
 include = ["load/**"]
 homepage = "https://github.com/w0rmr1d3r/finance-tracker"
 repository = "https://github.com/w0rmr1d3r/finance-tracker"
