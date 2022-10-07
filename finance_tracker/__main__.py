@@ -65,12 +65,10 @@ def run():
 def menu():
     last_choice = None
     while True:
-        choice = inquirer.list_input("",
-                                     choices=['run', 'exit'],
-                                     default=last_choice)
-        if choice == 'run':
+        choice = inquirer.list_input("", choices=["run", "exit"], default=last_choice)
+        if choice == "run":
             run()
-        elif choice == 'exit':
+        elif choice == "exit":
             return 0
         last_choice = choice
 
