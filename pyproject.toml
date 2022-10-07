@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "finance-tracker"
-version = "0.0.0-alpha1"
+version = "0.1.0"
 description = "Python tool to track finances over a year"
 license = "MIT"
 authors = ["w0rmr1d3r"]
@@ -11,7 +11,7 @@ repository = "https://github.com/w0rmr1d3r/finance-tracker"
 documentation = "https://github.com/w0rmr1d3r/finance-tracker"
 keywords = ["finance", "tracker", "poetry"]
 classifiers = [
-    "Development Status :: 3 - Alpha",
+    "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Intended Audience :: Developers",
     "Intended Audience :: Education",

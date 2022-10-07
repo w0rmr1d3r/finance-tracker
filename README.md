@@ -6,7 +6,9 @@ Python tool to track finances over a year
 
 ### PyPi package
 
-TBD
+```bash
+pip install finance-tracker
+```
 
 ## Usage
 
