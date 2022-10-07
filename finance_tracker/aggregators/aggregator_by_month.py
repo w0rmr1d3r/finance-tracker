@@ -1,6 +1,7 @@
 from collections import defaultdict
 
 from finance_tracker.entries.categorized_entry import CategorizedEntry
+from finance_tracker.printer import bcolors
 
 
 class AggregatorByMonth:
@@ -26,7 +27,7 @@ class AggregatorByMonth:
     def aggregate_by_month(self, entries: list[CategorizedEntry]) -> dict[dict[str, float]]:
         # {"January": {"CAT1": 1.0, "CAT2": 2.0}, "February": {"CAT3": 1.0, "CAT4": 2.0}}
         if entries is None:
-            # warn logger here
+            bcolors.print_warning("WARNING - entries are <None>. Will fail to aggregate them.")
             return {}
 
         months = defaultdict(dict, {k: defaultdict(float) for k in self.INT_MONTH_TO_STR_CONVERTER})

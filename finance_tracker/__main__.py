@@ -1,6 +1,7 @@
 import os
 import pathlib
 
+import inquirer
 from pandas import DataFrame
 
 from finance_tracker.aggregators.aggregator_by_month import AggregatorByMonth
@@ -11,7 +12,7 @@ from finance_tracker.printer import bcolors
 from finance_tracker.readers.entry_reader import EntryReader
 
 
-def main():
+def run():
     current_path = pathlib.Path(__file__).parent.resolve()
     category_searcher = CategorySearcher()
     categorizer = Categorizer(category_searcher=category_searcher)
@@ -44,7 +45,7 @@ def main():
     positive_categories_quantities = month_aggregator.aggregate_by_month(entries=positive)
     negative_categories_quantities = month_aggregator.aggregate_by_month(entries=negative)
 
-    bcolors.print_cyan("Result is:")
+    bcolors.print_cyan("\nResult is:\n")
     print(
         DataFrame.from_dict(
             data=negative_categories_quantities,
@@ -58,7 +59,19 @@ def main():
             orient="columns",
         ).fillna(0.0)
     )
+    bcolors.print_cyan("\n\n")
+
+
+def menu():
+    last_choice = None
+    while True:
+        choice = inquirer.list_input("", choices=["run", "exit"], default=last_choice)
+        if choice == "run":
+            run()
+        elif choice == "exit":
+            return 0
+        last_choice = choice
 
 
 if __name__ == "__main__":
-    main()
+    menu()
