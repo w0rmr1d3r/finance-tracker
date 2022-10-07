@@ -28,5 +28,7 @@ format:
 	poetry run isort --float-to-top .
 	poetry run black finance_tracker/ tests/
 
+build:
+	poetry build
 
-.PHONY: install install-dev update lock lock-refresh run setup-test test lint format
+.PHONY: install install-dev update lock lock-refresh run setup-test test lint format build
