@@ -12,5 +12,7 @@ class CategoriesQuantityAggregator:
             return categories_quantities
 
         for entry in entries:
-            categories_quantities[entry.category] = categories_quantities.get(entry.category, 0.0) + entry.quantity
+            categories_quantities[entry.category] = (
+                categories_quantities.get(entry.category, 0.0) + entry.quantity.amount
+            )
         return categories_quantities
