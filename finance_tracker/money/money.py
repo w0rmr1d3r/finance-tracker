@@ -11,7 +11,7 @@ class Money:
         if currency_code is None:
             raise CurrencyCodeIsNoneException()
         self._amount = amount
-        self._currency_code = currency_code
+        self._currency_code = currency_code.upper()
 
     @property
     def amount(self):
@@ -39,8 +39,7 @@ class Money:
 
     def __eq__(self, other):
         if isinstance(other, Money):
-            return ((self._amount == other.amount) and
-                    (self._currency_code == other.currency_code))
+            return (self._amount == other.amount) and (self._currency_code == other.currency_code)
         return False
 
     def __str__(self):
