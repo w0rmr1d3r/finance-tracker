@@ -1,0 +1,41 @@
+class CurrencyCodeIsNoneException(Exception):
+    pass
+
+
+class CurrencyIsNotTheSameException(Exception):
+    pass
+
+
+class Money:
+    def __init__(self, currency_code: str, amount: float = 0.0):
+        if currency_code is None:
+            raise CurrencyCodeIsNoneException()
+        self._amount = amount
+        self._currency_code = currency_code
+
+    @property
+    def amount(self):
+        return self._amount
+
+    @property
+    def currency_code(self):
+        return self._currency_code
+
+    def __add__(self, other):
+        if isinstance(other, Money):
+            if other.currency_code != self.currency_code:
+                raise CurrencyIsNotTheSameException()
+            other = other.amount
+        amount = self.amount + other
+        return self.__class__(amount=amount, currency_code=self.currency_code)
+
+    def __sub__(self, other):
+        if isinstance(other, Money):
+            if other.currency_code != self.currency_code:
+                raise CurrencyIsNotTheSameException()
+            other = other.amount
+        amount = self.amount - other
+        return self.__class__(amount=amount, currency_code=self.currency_code)
+
+    def __str__(self):
+        return f"{self.amount}{self.currency_code}"
