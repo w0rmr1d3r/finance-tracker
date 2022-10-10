@@ -1,6 +1,7 @@
 from datetime import date
 
 from finance_tracker.entries.entry import Entry
+from finance_tracker.money.money import Money
 
 
 def test_entry_can_be_built():
@@ -9,15 +10,15 @@ def test_entry_can_be_built():
         date_of_action="01/01/2022",
         title="ACTION",
         other_data="test",
-        quantity=1.56,
-        balance=-1.56,
+        quantity=Money(amount=1.56, currency_code="EUR"),
+        balance=Money(amount=-1.56, currency_code="EUR"),
     )
     assert entry.entry_date == "01/01/2022"
     assert entry.date_of_action == "01/01/2022"
     assert entry.title == "ACTION"
     assert entry.other_data == "test"
-    assert entry.quantity == 1.56
-    assert entry.balance == -1.56
+    assert entry.quantity == Money(amount=1.56, currency_code="EUR")
+    assert entry.balance == Money(amount=-1.56, currency_code="EUR")
 
 
 def test_entry_dates_as_time():
@@ -26,8 +27,8 @@ def test_entry_dates_as_time():
         date_of_action="03/05/2022",
         title="ACTION",
         other_data="test",
-        quantity=1.56,
-        balance=-1.56,
+        quantity=Money(amount=1.56, currency_code="EUR"),
+        balance=Money(amount=-1.56, currency_code="EUR"),
     )
     assert entry.entry_date == "01/02/2022"
     assert entry.date_of_action == "03/05/2022"
