@@ -17,6 +17,12 @@ def test_can_print_money():
     assert money.__str__() == f"0.0{currency_code}"
 
 
+def test_can_print_money_amount_rounded():
+    currency_code = Faker().currency_code()
+    money = Money(currency_code=currency_code, amount=0.1111)
+    assert money.__str__() == f"0.11{currency_code}"
+
+
 def test_money_currency_always_upper():
     currency_code = "eur"
     money = Money(currency_code=currency_code)

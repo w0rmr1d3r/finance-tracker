@@ -43,4 +43,5 @@ class Money:
         return False
 
     def __str__(self):
-        return f"{self.amount}{self.currency_code}"
+        rounded_amount = round(self.amount, 2)
+        return f"{rounded_amount}{self.currency_code}"
