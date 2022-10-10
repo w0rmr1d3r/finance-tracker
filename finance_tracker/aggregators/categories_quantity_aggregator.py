@@ -5,7 +5,7 @@ from deprecated.classic import deprecated
 from finance_tracker.entries.categorized_entry import CategorizedEntry
 
 
-@deprecated(reason="Use <AggregatorByMonth> instead, this isn't being used", version='0.1.0')
+@deprecated(reason="Use <AggregatorByMonth> instead, this isn't being used", version="0.1.0")
 class CategoriesQuantityAggregator:
     @staticmethod
     def aggregate_by_category(entries: list[CategorizedEntry]) -> dict[str, float]:
