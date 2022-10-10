@@ -17,6 +17,21 @@ def test_can_print_money():
     assert money.__str__() == f"0.0{currency_code}"
 
 
+def test_money_are_equal():
+    currency_code = Faker().currency_code()
+    money_one = Money(currency_code=currency_code, amount=1.0)
+    money_two = Money(currency_code=currency_code, amount=1.0)
+    assert money_one == money_two
+
+
+def test_money_are_not_equal():
+    currency_code_one = Faker().currency_code()
+    currency_code_two = Faker().currency_code()
+    money_one = Money(currency_code=currency_code_one, amount=2.0)
+    money_two = Money(currency_code=currency_code_two, amount=1.0)
+    assert money_one != money_two
+
+
 def test_raise_exception_if_no_currency_code():
     with raises(CurrencyCodeIsNoneException):
         _ = Money(currency_code=None)

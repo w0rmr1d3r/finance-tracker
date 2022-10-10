@@ -37,5 +37,11 @@ class Money:
         amount = self.amount - other
         return self.__class__(amount=amount, currency_code=self.currency_code)
 
+    def __eq__(self, other):
+        if isinstance(other, Money):
+            return ((self._amount == other.amount) and
+                    (self._currency_code == other.currency_code))
+        return False
+
     def __str__(self):
         return f"{self.amount}{self.currency_code}"
