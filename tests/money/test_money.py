@@ -20,7 +20,7 @@ def test_can_print_money():
 def test_money_currency_always_upper():
     currency_code = "eur"
     money = Money(currency_code=currency_code)
-    assert money.__str__() == f"0.0EUR"
+    assert money.__str__() == "0.0EUR"
 
 
 def test_money_are_equal():
