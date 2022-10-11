@@ -27,7 +27,7 @@ def aggregator() -> AggregatorByMonth:
         (13, None),
     ],
 )
-def test_get_int_mont_to_str(aggregator, int_month, expected_month):
+def test_get_int_month_to_str(aggregator, int_month, expected_month):
     assert aggregator.int_month_to_str(int_month) == expected_month
 
 
