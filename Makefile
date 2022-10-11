@@ -17,7 +17,7 @@ run:
 	poetry run python3 finance_tracker/__main__.py
 
 test:
-	poetry run pytest
+	poetry run pytest -svvvv
 
 lint:
 	poetry run isort --check-only .
