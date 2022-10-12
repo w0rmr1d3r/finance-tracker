@@ -1,3 +1,6 @@
+from finance_tracker.money.currency_codes import CurrencyCodes
+
+
 class CurrencyCodeIsNoneException(Exception):
     pass
 
@@ -45,3 +48,6 @@ class Money:
     def __str__(self):
         rounded_amount = round(self.amount, 2)
         return f"{rounded_amount}{self.currency_code}"
+
+
+DEFAULT_MONEY = Money(currency_code=CurrencyCodes.EUR)

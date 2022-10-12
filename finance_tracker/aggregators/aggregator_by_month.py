@@ -3,7 +3,7 @@ from collections import defaultdict
 from deprecated.classic import deprecated
 
 from finance_tracker.entries.categorized_entry import CategorizedEntry
-from finance_tracker.money.money import Money
+from finance_tracker.money.money import Money, DEFAULT_MONEY
 from finance_tracker.printer import bcolors
 
 
@@ -39,9 +39,8 @@ class AggregatorByMonth:
         months = defaultdict(dict, {v: defaultdict(Money) for k, v in self.INT_MONTH_TO_STR_CONVERTER.items()})
         for entry in entries:
             month_of_entry = self.int_mont_to_str(entry.month_from_date())
-            # todo - why EUR is default?
             months[month_of_entry][entry.category] = (
-                months[month_of_entry].get(entry.category, Money("EUR")) + entry.quantity
+                months[month_of_entry].get(entry.category, DEFAULT_MONEY) + entry.quantity
             )
 
         return months

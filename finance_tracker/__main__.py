@@ -8,7 +8,7 @@ from finance_tracker.aggregators.aggregator_by_month import AggregatorByMonth
 from finance_tracker.categories.categories import negative_categories, positive_categories
 from finance_tracker.categories.categorizer import Categorizer
 from finance_tracker.categories.category_searcher import CategorySearcher
-from finance_tracker.money.money import Money
+from finance_tracker.money.money import DEFAULT_MONEY
 from finance_tracker.printer import bcolors
 from finance_tracker.readers.entry_reader import EntryReader
 
@@ -51,14 +51,14 @@ def run():
         DataFrame.from_dict(
             data=negative_categories_quantities,
             orient="columns",
-        ).fillna(Money(currency_code="eur"))  # todo - why eur default?
+        ).fillna(DEFAULT_MONEY)
     )
     print("-" * 100)
     bcolors.print_green(
         DataFrame.from_dict(
             data=positive_categories_quantities,
             orient="columns",
-        ).fillna(Money(currency_code="eur"))  # todo - why eur default?
+        ).fillna(DEFAULT_MONEY)
     )
     print("\n\n")
 
