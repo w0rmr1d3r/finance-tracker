@@ -9,6 +9,28 @@ def aggregator() -> AggregatorByMonth:
     return AggregatorByMonth()
 
 
+@pytest.mark.parametrize(
+    "int_month, expected_month",
+    [
+        (1, "January"),
+        (2, "February"),
+        (3, "March"),
+        (4, "April"),
+        (5, "May"),
+        (6, "June"),
+        (7, "July"),
+        (8, "August"),
+        (9, "September"),
+        (10, "October"),
+        (11, "November"),
+        (12, "December"),
+        (13, None),
+    ],
+)
+def test_get_int_month_to_str(aggregator, int_month, expected_month):
+    assert aggregator.int_month_to_str(int_month) == expected_month
+
+
 def test_if_no_entries_given_returns_quantities_with_zero(aggregator):
     result = aggregator.aggregate_by_month(entries=[])
     assert result == {
