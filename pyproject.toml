@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "finance-tracker"
-version = "0.1.0"
+version = "0.2.0"
 description = "Python tool to track finances over a year"
 license = "MIT"
 authors = ["w0rmr1d3r"]
