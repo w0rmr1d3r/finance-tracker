@@ -17,12 +17,12 @@ run:
 	poetry run python3 finance_tracker/__main__.py
 
 test:
-	poetry run pytest
+	poetry run pytest -svvvv
 
 lint:
 	poetry run isort --check-only .
 	poetry run black --check finance_tracker/ tests/
-	poetry run flake8 .
+	poetry run flake8 finance_tracker/ tests/
 
 format:
 	poetry run isort --float-to-top .

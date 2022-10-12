@@ -38,7 +38,7 @@ def run():
     bcolors.print_green("Setting categories for entries...")
     categorizer.set_category_for_entries(uncategorized_entries=entries)
 
-    bcolors.print_green("Splitting categories into positive vs negative")
+    bcolors.print_green("Splitting entries into positives and negatives")
     positive = [entry for entry in entries if entry.category in positive_categories()]
     negative = [entry for entry in entries if entry.category in negative_categories()]
 
@@ -47,20 +47,20 @@ def run():
     negative_categories_quantities = month_aggregator.aggregate_by_month(entries=negative)
 
     bcolors.print_cyan("\nResult is:\n")
-    print(
+    bcolors.print_fail(
         DataFrame.from_dict(
             data=negative_categories_quantities,
             orient="columns",
         ).fillna(Money(currency_code="eur"))  # todo - why eur default?
     )
     print("-" * 100)
-    print(
+    bcolors.print_green(
         DataFrame.from_dict(
             data=positive_categories_quantities,
             orient="columns",
         ).fillna(Money(currency_code="eur"))  # todo - why eur default?
     )
-    bcolors.print_cyan("\n\n")
+    print("\n\n")
 
 
 def menu():
