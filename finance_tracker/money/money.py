@@ -10,11 +10,11 @@ class CurrencyIsNotTheSameException(Exception):
 
 
 class Money:
-    def __init__(self, currency_code: str, amount: float = 0.0):
+    def __init__(self, currency_code: CurrencyCodes, amount: float = 0.0):
         if currency_code is None:
             raise CurrencyCodeIsNoneException()
         self._amount = amount
-        self._currency_code = currency_code.upper()
+        self._currency_code = currency_code
 
     @property
     def amount(self):
