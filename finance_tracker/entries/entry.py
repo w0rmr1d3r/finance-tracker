@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from datetime import date, datetime
 
+from finance_tracker.money.money import Money
+
 
 @dataclass
 class Entry:
@@ -8,8 +10,8 @@ class Entry:
     date_of_action: str
     title: str
     other_data: str
-    quantity: float
-    balance: float
+    quantity: Money
+    balance: Money
 
     def date_as_time(self) -> date:
         return datetime.strptime(self.entry_date, "%d/%m/%Y").date()

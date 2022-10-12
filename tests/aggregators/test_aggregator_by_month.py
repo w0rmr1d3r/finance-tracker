@@ -2,6 +2,8 @@ import pytest
 
 from finance_tracker.aggregators.aggregator_by_month import AggregatorByMonth
 from finance_tracker.entries.categorized_entry import CategorizedEntry
+from finance_tracker.money.currency_codes import CurrencyCodes
+from finance_tracker.money.money import Money
 
 
 @pytest.fixture
@@ -61,8 +63,8 @@ def test_if_entries_given_returns_aggregated_by_month(aggregator):
             date_of_action="01/01/2022",
             title="ACTION",
             other_data="test",
-            quantity=1000,
-            balance=-1.56,
+            quantity=Money(amount=1000, currency_code=CurrencyCodes.EUR),
+            balance=Money(amount=-1.56, currency_code=CurrencyCodes.EUR),
             category="PAYCHECK",
         ),
         CategorizedEntry(
@@ -70,16 +72,16 @@ def test_if_entries_given_returns_aggregated_by_month(aggregator):
             date_of_action="01/02/2022",
             title="ACTION",
             other_data="test",
-            quantity=1000.01,
-            balance=-1.56,
+            quantity=Money(amount=1000.01, currency_code=CurrencyCodes.EUR),
+            balance=Money(amount=-1.56, currency_code=CurrencyCodes.EUR),
             category="PAYCHECK",
         ),
     ]
 
     result = aggregator.aggregate_by_month(entries=entries)
     assert result == {
-        "January": {"PAYCHECK": 1000},
-        "February": {"PAYCHECK": 1000.01},
+        "January": {"PAYCHECK": Money(amount=1000, currency_code=CurrencyCodes.EUR)},
+        "February": {"PAYCHECK": Money(amount=1000.01, currency_code=CurrencyCodes.EUR)},
         "March": {},
         "April": {},
         "May": {},
