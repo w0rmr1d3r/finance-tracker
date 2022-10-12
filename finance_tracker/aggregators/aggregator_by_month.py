@@ -3,7 +3,7 @@ from collections import defaultdict
 from deprecated.classic import deprecated
 
 from finance_tracker.entries.categorized_entry import CategorizedEntry
-from finance_tracker.money.money import Money, DEFAULT_MONEY
+from finance_tracker.money.money import DEFAULT_MONEY, Money
 from finance_tracker.printer import bcolors
 
 

@@ -1,6 +1,7 @@
 import csv
 
 from finance_tracker.entries.entry import Entry
+from finance_tracker.money.currency_codes import CurrencyCodes
 from finance_tracker.money.money import Money
 
 
@@ -24,8 +25,8 @@ class EntryReader:
                         date_of_action=row[1],
                         title=row[2],
                         other_data=row[3],
-                        quantity=Money(amount=float_in_str_to_str(row[4]), currency_code="EUR"),
-                        balance=Money(amount=float_in_str_to_str(row[5]), currency_code="EUR"),
+                        quantity=Money(amount=float_in_str_to_str(row[4]), currency_code=CurrencyCodes.EUR),
+                        balance=Money(amount=float_in_str_to_str(row[5]), currency_code=CurrencyCodes.EUR),
                     )
                 )
         return entries
