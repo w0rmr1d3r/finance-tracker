@@ -1,4 +1,4 @@
-name: CI
+name: PyLint Suggestions
 
 on:
   push:
@@ -15,7 +15,7 @@ jobs:
       matrix:
         python-version: [ '3.9', '3.10' ]
 
-    name: CI ${{ matrix.python-version }}
+    name: PyLint ${{ matrix.python-version }}
 
     steps:
       - uses: actions/checkout@v3
