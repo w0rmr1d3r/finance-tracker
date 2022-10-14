@@ -10,20 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: [ '3.9', '3.10' ]
-
-    name: PyLint ${{ matrix.python-version }}
-
     steps:
       - uses: actions/checkout@v3
 
       - name: Setup python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.9'
 
       - name: Install and configure Poetry
         uses: snok/install-poetry@v1
@@ -33,5 +26,5 @@ jobs:
       - name: Install dev dependencies
         run: make install-dev
 
-      - name: Lint
+      - name: PyLint Suggestions
         run: make lint-suggestions
