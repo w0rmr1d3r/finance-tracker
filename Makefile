@@ -23,7 +23,9 @@ lint:
 	poetry run isort --check-only .
 	poetry run black --check finance_tracker/ tests/
 	poetry run flake8 finance_tracker/ tests/
-	poetry run pylint --max-line-length 120 finance_tracker/ tests/
+
+lint-suggestions:
+	poetry run pylint --exit-zero --max-line-length 120 finance_tracker/ tests/
 
 format:
 	poetry run isort --float-to-top .
@@ -32,4 +34,4 @@ format:
 build:
 	poetry build
 
-.PHONY: install install-dev update lock lock-refresh run setup-test test lint format build
+.PHONY: install install-dev update lock lock-refresh run setup-test test lint lint-suggestions format build
