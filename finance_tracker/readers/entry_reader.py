@@ -15,7 +15,7 @@ class EntryReader:
         entries = []
         with open(path_to_file, "r") as file:
             csvreader = csv.reader(file, dialect="excel", delimiter=";")
-            for i in range(headers_to_ignore):
+            for _ in range(headers_to_ignore):
                 next(csvreader)
 
             for row in csvreader:
