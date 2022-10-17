@@ -5,23 +5,19 @@ from finance_tracker.money.currency_codes import CurrencyCodes
 from finance_tracker.money.money import Money
 from finance_tracker.readers.base_reader import BaseReader
 
-# todo - move this internally and deprecate this one
+
 def float_in_str_to_str(to_convert: str) -> float:
     return float(to_convert.replace(".", "").replace(",", "."))
 
-
-class EntryReader(BaseReader):
-    _HEADERS_TO_IGNORE = 3
+# todo - in progress + test
+class RevolutReader(BaseReader):
+    _HEADERS_TO_IGNORE = 1
 
     def read_from_file(self, path_to_file: str) -> list:
-        return self.read_entries_from_file(headers_to_ignore=self._HEADERS_TO_IGNORE, path_to_file=path_to_file)
-
-    # todo - test
-    def read_entries_from_file(self, headers_to_ignore: int, path_to_file: str) -> list[Entry]:
         entries = []
         with open(path_to_file, "r") as file:
             csvreader = csv.reader(file, dialect="excel", delimiter=";")
-            for i in range(headers_to_ignore):
+            for _ in range(self._HEADERS_TO_IGNORE):
                 next(csvreader)
 
             for row in csvreader:
