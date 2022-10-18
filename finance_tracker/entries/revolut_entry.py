@@ -12,7 +12,7 @@ class RevolutEntry:
     started_date: str
     completed_date: str
     description: str
-    amount: float  # todo - this includes sign eg -4, careful when grouping by categories, needs to be updated
+    amount: float
     fee: float
     currency: str
     state: str
@@ -21,11 +21,25 @@ class RevolutEntry:
     def quantity(self) -> Money:
         return Money(amount=self.amount, currency_code=CurrencyCodes[self.currency])
 
+    def quantity_as_absolute(self) -> Money:
+        return Money(amount=abs(self.amount), currency_code=CurrencyCodes[self.currency])
+
+    def balance_as_money(self) -> Money:
+        return Money(amount=self.balance, currency_code=CurrencyCodes[self.currency])
+
     def started_date_as_time(self) -> date:
         return datetime.strptime(self.started_date, "%Y-%m-%d %H:%M:%S").date()
 
+    def started_date_for_entry(self) -> str:
+        s_date = self.started_date_as_time()
+        return f"{s_date.day}/{s_date.month}/{s_date.year}"
+
     def completed_date_as_time(self) -> date:
         return datetime.strptime(self.completed_date, "%Y-%m-%d %H:%M:%S").date()
+
+    def completed_date_for_entry(self) -> str:
+        c_date = self.completed_date_as_time()
+        return f"{c_date.day}/{c_date.month}/{c_date.year}"
 
     def month_from_started_date(self) -> int:
         return self.started_date_as_time().month

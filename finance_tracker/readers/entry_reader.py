@@ -5,7 +5,7 @@ from finance_tracker.money.currency_codes import CurrencyCodes
 from finance_tracker.money.money import Money
 from finance_tracker.readers.base_reader import BaseReader
 
-# todo - move this internally and deprecate this one
+
 def float_in_str_to_str(to_convert: str) -> float:
     return float(to_convert.replace(".", "").replace(",", "."))
 
