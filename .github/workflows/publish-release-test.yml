@@ -1,4 +1,4 @@
-name: PyPI release
+name: Test PyPI release
 
 on:
   release:
