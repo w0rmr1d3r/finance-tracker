@@ -1,0 +1,19 @@
+name: Snyk
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    name: Snyk
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Snyk
+        uses: snyk/actions@0.3.0
