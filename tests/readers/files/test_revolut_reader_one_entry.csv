@@ -1,0 +1,2 @@
+Type,Product,Started Date,Completed Date,Description,Amount,Fee,Currency,State,Balance
+CARD_PAYMENT,Current,2022-10-02 15:01:02,2022-10-03 15:01:02,Supermarket purchase,-4.00,0.00,EUR,COMPLETED,100.00

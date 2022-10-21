@@ -132,6 +132,4 @@ dmypy.json
 .idea
 
 # Project files and folders
-load/
-load/categories
-load/entries_files
+load/**
