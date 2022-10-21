@@ -27,6 +27,6 @@ version-resolver:
       - 'patch'
   default: minor
 template: |
-  ## Changes
+  # Changes
 
   $CHANGES
