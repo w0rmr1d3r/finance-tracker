@@ -9,6 +9,9 @@ categories:
     labels:
       - 'fix'
       - 'bug'
+  - title: 'Security'
+    labels:
+      - 'security'
   - title: 'Maintenance'
     labels:
       - 'cleaning'
