@@ -25,10 +25,10 @@ lint:
 	poetry run flake8 finance_tracker/ tests/
 
 py-lint:
-	poetry run pylint finance_tracker/
+	poetry run pylint --exit-zero finance_tracker/
 
 py-lint-test:
-	poetry run pylint --exit-zero --disable=C0116 --disable=C0114 tests/
+	poetry run pylint --exit-zero --disable=C0116 tests/
 
 format:
 	poetry run isort --float-to-top .
