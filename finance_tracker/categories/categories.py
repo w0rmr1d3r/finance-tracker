@@ -7,8 +7,8 @@ DEFAULT_CATEGORY = "n/a"
 
 def all_categories():
     current_path = pathlib.Path(__file__).parent.resolve()
-    with open(f"{current_path}/../../load/categories/categories.json") as f:
-        return json.load(f)
+    with open(f"{current_path}/../../load/categories/categories.json") as file:
+        return json.load(file)
 
 
 def categories_items():

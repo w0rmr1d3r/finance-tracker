@@ -1,4 +1,4 @@
-name: CI
+name: PyLint
 
 on:
   push:
@@ -10,20 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: [ '3.9', '3.10' ]
-
-    name: CI ${{ matrix.python-version }}
-
     steps:
       - uses: actions/checkout@v3
 
       - name: Setup python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.9'
 
       - name: Install and configure Poetry
         uses: snok/install-poetry@v1
@@ -31,8 +24,8 @@ jobs:
       - name: Install dev dependencies
         run: make install-dev
 
-      - name: Lint
-        run: make lint
+      - name: PyLint Check
+        run: make py-lint
 
-      - name: Run test
-        run: make test
+      - name: PyLint for tests
+        run: make py-lint-test

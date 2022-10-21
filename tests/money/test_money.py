@@ -14,13 +14,13 @@ def test_can_create_money():
 def test_can_print_money():
     currency_code = Faker().currency_code()
     money = Money(currency_code=currency_code)
-    assert money.__str__() == f"0.0{currency_code}"
+    assert str(money) == f"0.0{currency_code}"
 
 
 def test_can_print_money_amount_rounded():
     currency_code = Faker().currency_code()
     money = Money(currency_code=currency_code, amount=0.1111)
-    assert money.__str__() == f"0.11{currency_code}"
+    assert str(money) == f"0.11{currency_code}"
 
 
 def test_money_are_equal():

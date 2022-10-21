@@ -24,6 +24,12 @@ lint:
 	poetry run black --check finance_tracker/ tests/
 	poetry run flake8 finance_tracker/ tests/
 
+py-lint:
+	poetry run pylint --exit-zero finance_tracker/
+
+py-lint-test:
+	poetry run pylint --exit-zero --disable=C0116 tests/
+
 format:
 	poetry run isort --float-to-top .
 	poetry run black finance_tracker/ tests/
@@ -31,4 +37,4 @@ format:
 build:
 	poetry build
 
-.PHONY: install install-dev update lock lock-refresh run setup-test test lint format build
+.PHONY: install install-dev update lock lock-refresh run setup-test test lint py-lint py-lint-test format build
