@@ -4,10 +4,10 @@ categories:
   - title: 'New things'
     labels:
       - 'enhancement'
+      - 'feature'
   - title: 'Bug Fixes'
     labels:
       - 'fix'
-      - 'bugfix'
       - 'bug'
   - title: 'Maintenance'
     labels:
