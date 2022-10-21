@@ -20,11 +20,12 @@ jobs:
 
       - name: Install and configure Poetry
         uses: snok/install-poetry@v1
-        with:
-          version: 1.1.13
 
       - name: Install dev dependencies
         run: make install-dev
 
-      - name: PyLint Suggestions
-        run: make lint-suggestions
+      - name: PyLint Check
+        run: make py-lint
+
+      - name: PyLint for tests
+        run: make py-lint-test
