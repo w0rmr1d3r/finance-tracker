@@ -1,3 +1,5 @@
+import enlighten
+
 from finance_tracker.categories.category_searcher import CategorySearcher
 from finance_tracker.entries.categorized_entry import CategorizedEntry
 from finance_tracker.entries.entry import Entry
@@ -12,5 +14,7 @@ class Categorizer:
         return CategorizedEntry.from_entry_with_category(entry=uncategorized_entry, category=category)
 
     def set_category_for_entries(self, uncategorized_entries: list[Entry]):
+        pbar = enlighten.Counter(total=len(uncategorized_entries), desc="Categories", unit="categories")
         for i in range(len(uncategorized_entries)):
             uncategorized_entries[i] = self.set_category_for_entry(uncategorized_entries[i])
+            pbar.update()
