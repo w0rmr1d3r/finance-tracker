@@ -9,6 +9,7 @@ Python tool to track finances over a year
 [![CI](https://github.com/w0rmr1d3r/finance-tracker/actions/workflows/pylint.yml/badge.svg?branch=master)](https://github.com/w0rmr1d3r/finance-tracker/actions/workflows/pylint.yml)
 ![GitHub last commit](https://img.shields.io/github/last-commit/w0rmr1d3r/finance-tracker)
 [![PyPi downloads](https://img.shields.io/pypi/dm/finance-tracker?label=PyPi%20downloads)](https://pypistats.org/packages/finance-tracker)
+[![Downloads](https://pepy.tech/badge/finance-tracker/month)](https://pepy.tech/project/finance-tracker)
 
 ## Installation
 
