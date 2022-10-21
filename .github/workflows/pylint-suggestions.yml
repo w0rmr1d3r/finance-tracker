@@ -1,4 +1,4 @@
-name: PyLint Suggestions
+name: PyLint
 
 on:
   push:
