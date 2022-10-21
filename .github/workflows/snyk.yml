@@ -24,6 +24,6 @@ jobs:
         uses: snok/install-poetry@v1
 
       - name: Snyk
-        uses: snyk/actions@0.3.0
+        uses: snyk/actions/python@0.3.0
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
