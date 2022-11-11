@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from datetime import date, datetime
 
+from deprecated.classic import deprecated
+
 from finance_tracker.money.currency_codes import CurrencyCodes
 from finance_tracker.money.money import Money
 
@@ -19,8 +21,14 @@ class RevolutEntry:
     balance: float
 
     def quantity(self) -> Money:
+        """
+        Returns the quantity of this entry as a Money object composed of
+        the same amount and currency code from its currency.
+        :return: Money from amount and currency
+        """
         return Money(amount=self.amount, currency_code=CurrencyCodes[self.currency])
 
+    @deprecated(reason="Use quantity. Entries use the value its read, no absolute.", version="1.1.0")
     def quantity_as_absolute(self) -> Money:
         return Money(amount=abs(self.amount), currency_code=CurrencyCodes[self.currency])
 
