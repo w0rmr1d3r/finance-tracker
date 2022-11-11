@@ -28,11 +28,17 @@ class Entry:
 
     @classmethod
     def from_revolut_entry(cls, revolut_entry: RevolutEntry):
+        """
+        Returns an entry from a RevolutEntry. Values not recognized or not being in RevolutEntry will be created
+        with default values.
+        :param revolut_entry: RevolutEntry to obtain data from
+        :return: Entry from a RevolutEntry
+        """
         return cls(
             entry_date=revolut_entry.started_date_for_entry(),
             date_of_action=revolut_entry.completed_date_for_entry(),
             title=revolut_entry.description,
             other_data="",
-            quantity=revolut_entry.quantity_as_absolute(),
+            quantity=revolut_entry.quantity(),
             balance=revolut_entry.balance_as_money(),
         )
