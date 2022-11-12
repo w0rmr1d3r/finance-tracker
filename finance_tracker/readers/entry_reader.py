@@ -26,7 +26,7 @@ class EntryReader(BaseReader):
     # todo - test
     def read_entries_from_file(self, headers_to_ignore: int, path_to_file: str) -> list[Entry]:
         entries = []
-        with open(path_to_file, "r") as file:
+        with open(path_to_file, "r", encoding="UTF-8") as file:
             csvreader = csv.reader(file, dialect="excel", delimiter=";")
             for _ in range(headers_to_ignore):
                 next(csvreader)
