@@ -38,7 +38,7 @@ class AggregatorByMonth:
 
         months = defaultdict(dict, {v: defaultdict(Money) for k, v in self.INT_MONTH_TO_STR_CONVERTER.items()})
         for entry in entries:
-            month_of_entry = self.int_mont_to_str(entry.month_from_date())
+            month_of_entry = self.int_month_to_str(entry.month_from_date())
             months[month_of_entry][entry.category] = (
                 months[month_of_entry].get(entry.category, DEFAULT_MONEY) + entry.quantity
             )
