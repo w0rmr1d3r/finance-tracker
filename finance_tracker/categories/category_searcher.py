@@ -1,11 +1,11 @@
-from functools import cache
+from functools import lru_cache
 
 from finance_tracker.categories.categories import DEFAULT_CATEGORY, categories_items
 from finance_tracker.printer import bcolors
 
 
 class CategorySearcher:
-    @cache
+    @lru_cache
     def search_category(self, title: str) -> str:
         for category, categorized_items in categories_items().items():
             if title in categorized_items:

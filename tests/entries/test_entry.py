@@ -31,5 +31,5 @@ def test_entry_from_revolut_entry(revolut_entry):
     assert entry.date_of_action_as_time() == date(day=3, month=10, year=2022)
     assert entry.title == "Supermarket purchase"
     assert entry.other_data == ""
-    assert entry.quantity == Money(amount=4, currency_code=CurrencyCodes.EUR)
+    assert entry.quantity == Money(amount=-4, currency_code=CurrencyCodes.EUR)
     assert entry.balance == Money(amount=100, currency_code=CurrencyCodes.EUR)
