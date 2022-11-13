@@ -9,7 +9,7 @@ class RevolutReader(BaseReader):
 
     def read_from_file(self, path_to_file: str) -> list:
         entries = []
-        with open(path_to_file, "r") as file:
+        with open(path_to_file, "r", encoding="ASCII") as file:
             csvreader = csv.reader(file, dialect="excel", delimiter=",")
             for _ in range(self._HEADERS_TO_IGNORE):
                 next(csvreader)
