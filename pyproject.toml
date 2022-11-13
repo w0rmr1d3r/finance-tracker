@@ -36,7 +36,7 @@ python = "^3.9"
 
 [tool.poetry.dev-dependencies]
 black = "^22.10.0"
-faker = "^15.0.0"
+faker = "^15.3.1"
 flake8 = "^5.0.4"
 isort = "^5.10.1"
 pylint = "^2.15.4"
