@@ -545,6 +545,7 @@ dill = [
 enlighten = [
     {file = "enlighten-1.11.1-py2.py3-none-any.whl", hash = "sha256:e825eb534ca80778bb7d46e5581527b2a6fae559b6cf09e290a7952c6e11961e"},
     {file = "enlighten-1.11.1.tar.gz", hash = "sha256:57abd98a3d3f83484ef9f91f9255f4d23c8b3097ecdb647c7b9b0049d600b7f8"},
+]
 exceptiongroup = [
     {file = "exceptiongroup-1.0.0-py3-none-any.whl", hash = "sha256:2ac84b496be68464a2da60da518af3785fff8b7ec0d090a581604bc870bdee41"},
     {file = "exceptiongroup-1.0.0.tar.gz", hash = "sha256:affbabf13fb6e98988c38d9c5650e701569fe3c1de3233cfb61c5f33774690ad"},
