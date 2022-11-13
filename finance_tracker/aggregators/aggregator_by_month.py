@@ -1,5 +1,6 @@
 from collections import defaultdict
 
+import enlighten
 from deprecated.classic import deprecated
 
 from finance_tracker.entries.categorized_entry import CategorizedEntry
@@ -37,10 +38,12 @@ class AggregatorByMonth:
             return {}
 
         months = defaultdict(dict, {v: defaultdict(Money) for k, v in self.INT_MONTH_TO_STR_CONVERTER.items()})
+        pbar = enlighten.Counter(total=len(entries), desc="Aggregating by month", unit="entries")
         for entry in entries:
             month_of_entry = self.int_month_to_str(entry.month_from_date())
             months[month_of_entry][entry.category] = (
                 months[month_of_entry].get(entry.category, DEFAULT_MONEY) + entry.quantity
             )
+            pbar.update()
 
         return months

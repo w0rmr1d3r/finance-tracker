@@ -1,6 +1,7 @@
 import os
 import pathlib
 
+import enlighten
 import inquirer
 from pandas import DataFrame
 
@@ -34,6 +35,7 @@ def run():
     # Read from files
     bcolors.print_green("Reading entries from files...")
     entries = []
+    pbar = enlighten.Counter(total=len(entries_files), desc="Entries files", unit="files")
     for file in entries_files:
         if file.endswith(".csv"):
             entries.extend(
@@ -41,10 +43,12 @@ def run():
                     path_to_file=f"{current_path}/../load/entries_files/{file}",
                 )
             )
+        pbar.update()
 
     # Reading from Revolut files
     bcolors.print_green("Reading entries from Revolut files...")
     revolut_entries = []
+    pbar_rev = enlighten.Counter(total=len(revolut_entries_files), desc="Revolut entries files", unit="files")
     for file in revolut_entries_files:
         if file.endswith(".csv"):
             revolut_entries.extend(
@@ -52,6 +56,7 @@ def run():
                     path_to_file=f"{current_path}/../load/entries_files/revolut/{file}",
                 )
             )
+        pbar_rev.update()
 
     # We transform Revolut entries to Entry
     for rev_entry in revolut_entries:
@@ -60,7 +65,7 @@ def run():
     bcolors.print_green("Setting categories for entries...")
     categorizer.set_category_for_entries(uncategorized_entries=entries)
 
-    bcolors.print_green("Splitting entries into positives and negatives")
+    bcolors.print_green("Splitting entries into positives and negatives...")
     positive = [entry for entry in entries if entry.category in positive_categories()]
     negative = [entry for entry in entries if entry.category in negative_categories()]
 
