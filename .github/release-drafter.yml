@@ -18,6 +18,9 @@ categories:
   - title: 'Documentation'
     labels:
       - 'documentation'
+  - title: 'Bumps'
+    labels:
+      - 'bump'
 version-resolver:
   major:
     labels:
