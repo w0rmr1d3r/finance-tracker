@@ -7,8 +7,17 @@ from finance_tracker.entries.categorized_entry import CategorizedEntry
 
 @deprecated(reason="Use <AggregatorByMonth> instead, this isn't being used", version="0.1.0")
 class CategoriesQuantityAggregator:
+    """
+    DEPRECATED CLASS
+    """
     @staticmethod
     def aggregate_by_category(entries: list[CategorizedEntry]) -> dict[str, float]:
+        """
+        DEPRECATED FUNCTION
+
+        :param entries: list of categorized entries
+        :return: Dictionary of categories and quantities of each category
+        """
         categories_quantities = defaultdict(float)
         if entries is None:
             # warn logger here

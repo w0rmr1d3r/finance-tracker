@@ -25,9 +25,23 @@ class AggregatorByMonth:
 
     @deprecated(reason="Typo in name, use <int_month_to_str> instead", version="0.1.0")
     def int_mont_to_str(self, month: int) -> str:
+        """
+        DEPRECATED
+
+        USE int_month_to_str INSTEAD
+
+        :param month:
+        :return:
+        """
         return self.int_month_to_str(month)
 
     def int_month_to_str(self, month: int) -> str:
+        """
+        Returns the name of the month given a numeric value of it.
+
+        :param month: Numeric value of the month (from 1 to 12)
+        :return: Name of the month
+        """
         return self.INT_MONTH_TO_STR_CONVERTER.get(month)
 
     def aggregate_by_month(self, entries: list[CategorizedEntry]) -> dict[dict[str, Money]]:

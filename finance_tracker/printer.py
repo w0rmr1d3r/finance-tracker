@@ -11,26 +11,62 @@ class bcolors:
 
     @classmethod
     def print_header(cls, message: str) -> None:
+        """
+        Prints given message as a header
+
+        :param message: Message to print
+        :return: None
+        """
         print(f"{bcolors.HEADER}{message}{bcolors.ENDC}")
 
     @classmethod
     def print_blue(cls, message: str) -> None:
+        """
+        Prints given message in blue
+
+        :param message: Message to print
+        :return: None
+        """
         print(f"{bcolors.OKBLUE}{message}{bcolors.ENDC}")
 
     @classmethod
     def print_cyan(cls, message: str) -> None:
+        """
+        Prints given message in cyan
+
+        :param message: Message to print
+        :return: None
+        """
         print(f"{bcolors.OKCYAN}{message}{bcolors.ENDC}")
 
     @classmethod
     def print_green(cls, message: str) -> None:
+        """
+        Prints given message in green
+
+        :param message: Message to print
+        :return: None
+        """
         print(f"{bcolors.OKGREEN}{message}{bcolors.ENDC}")
 
     @classmethod
     def print_warning(cls, message: str) -> None:
+        """
+        Prints given message as a warning (yellow)
+
+        :param message: Message to print
+        :return: None
+        """
         print(f"{bcolors.WARNING}{message}{bcolors.ENDC}")
 
     @classmethod
     def print_fail(cls, message: str) -> None:
+        """
+        Prints given message as a fail (red)
+
+        :param message: Message to print
+        :return: None
+        """
         print(f"{bcolors.FAIL}{message}{bcolors.ENDC}")
 
     @classmethod
