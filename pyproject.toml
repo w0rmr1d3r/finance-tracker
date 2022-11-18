@@ -10,6 +10,7 @@ homepage = "https://github.com/w0rmr1d3r/finance-tracker"
 repository = "https://github.com/w0rmr1d3r/finance-tracker"
 documentation = "https://github.com/w0rmr1d3r/finance-tracker"
 keywords = ["finance", "tracker", "poetry"]
+# If the classifiers for Python versions are updated, please update the CI too.
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
@@ -22,6 +23,7 @@ classifiers = [
     "Programming Language :: Python :: 3 :: Only",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Topic :: Office/Business",
     "Topic :: Office/Business :: Financial",
     "Topic :: Office/Business :: Financial :: Accounting",
@@ -32,6 +34,7 @@ classifiers = [
 Deprecated = "^1.2.13"
 inquirer = "^2.10.0"
 pandas = "^1.5.0"
+# If this minimum Python version supported were to change, please update the classifiers and workflows too.
 python = "^3.9"
 
 [tool.poetry.dev-dependencies]
