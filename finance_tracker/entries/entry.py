@@ -15,9 +15,19 @@ class Entry:
     balance: Money
 
     def date_as_time(self) -> date:
+        """
+        Returns self entry_date converted to a date object
+
+        :return: Date object given an entry_date
+        """
         return datetime.strptime(self.entry_date, "%d/%m/%Y").date()
 
     def date_of_action_as_time(self) -> date:
+        """
+        Returns self date_of_action converted to a date object
+
+        :return: Date object given a date_of_action
+        """
         return datetime.strptime(self.date_of_action, "%d/%m/%Y").date()
 
     def month_from_date(self) -> int:

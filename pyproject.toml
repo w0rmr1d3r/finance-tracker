@@ -50,8 +50,9 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.pylint.'MESSAGES CONTROL']
-max-line-length = 120
 disable = "C0114"
+fail-under = 8
+max-line-length = 120
 
 [tool.black]
 line-length = 120

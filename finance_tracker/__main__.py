@@ -15,7 +15,12 @@ from finance_tracker.readers.entry_reader import EntryReader
 from finance_tracker.readers.revolut_reader import RevolutReader
 
 
-def run():
+def run() -> None:
+    """
+    Runs the app.
+
+    :return: None
+    """
     # Init objects
     current_path = pathlib.Path(__file__).parent.resolve()
     category_searcher = CategorySearcher()
@@ -85,14 +90,20 @@ def run():
     print("\n\n")
 
 
-def menu():
+def menu() -> None:
+    """
+    Shows the menu with current options of the app.
+    Each option should call a function besides exit.
+
+    :return: None
+    """
     last_choice = None
     while True:
         choice = inquirer.list_input("", choices=["run", "exit"], default=last_choice)
         if choice == "run":
             run()
         elif choice == "exit":
-            return 0
+            return
         last_choice = choice
 
 
