@@ -10,6 +10,7 @@ class CategoriesQuantityAggregator:
     """
     DEPRECATED CLASS
     """
+
     @staticmethod
     def aggregate_by_category(entries: list[CategorizedEntry]) -> dict[str, float]:
         """
