@@ -26,75 +26,50 @@ pip install finance-tracker
 1. Clone the repo
 2. Install [poetry](https://python-poetry.org)
 3. Run `make install`
-4. Load the categories and categories to filter as incomes wanted in a file called `categories.json`
-   in `./load/categories/`. Such as:
-    ```json
-    {
-      "CATEGORIES": {
-        "CATEGORY_ONE": [
-          "TITLE TO CATEGORIZE"
-        ],
-        "CATEGORY_TWO": [
-          "TITLE 2 TO CATEGORIZE"
-        ]
-      },
-      "POSITIVE_CATEGORIES": [
-        "CATEGORY_TWO"
-      ]
-    }
-    ```
-
-5. Load your CSV files according to your bank under `./load/entries_files/{bank}` according to your bank.
-   See [Banks Supported](#banks-supported).
-
-6. Load any other CSV files in the folder `./load/entries_files/`. By default, those files will have this format:
-    ```csv
-    HEADER1;;;;;
-    HEADER2;;;;;
-    DATE;DATE TWO;TITLE;OTHER DATA;QUANTITY;OTHER
-    01/01/1999;01/01/1999;PAYCHECK;PAYCHECK FROM COMPANY 1;1.000;1.000
-    ```
-
-7. Run `make run` and enjoy!
+4. Set up the data as explained [here](#setting-up-the-data)
+5. Run `make run` and enjoy!
 
 ### From package installation
 
 1. Follow the steps in [Installation](#installation)
-2. Load the categories and categories to filter as incomes wanted in a file called `categories.json`
-   in `./load/categories/`. Such as:
-    ```json
-    {
-      "CATEGORIES": {
-        "CATEGORY_ONE": [
-          "TITLE TO CATEGORIZE"
-        ],
-        "CATEGORY_TWO": [
-          "TITLE 2 TO CATEGORIZE"
-        ]
-      },
-      "POSITIVE_CATEGORIES": [
-        "CATEGORY_TWO"
-      ]
-    }
-    ```
-
-3. Load your CSV files according to your bank under `./load/entries_files/{bank}` according to your bank.
-   See [Banks Supported](#banks-supported).
-
-4. Load any other CSV files in the folder `./load/entries_files/`. By default, those files will have this format:
-    ```csv
-    HEADER1;;;;;
-    HEADER2;;;;;
-    DATE;DATE TWO;TITLE;OTHER DATA;QUANTITY;OTHER
-    01/01/1999;01/01/1999;PAYCHECK;PAYCHECK FROM COMPANY 1;1.000;1.000
-    ```
-
-5. Import it and use it in your project like this:
+2. Set up the data as explained [here](#setting-up-the-data)
+3. Import it and use it in your project like this:
     ```python
     from finance_tracker.__main__ import run
 
     if __name__ == "__main__":
         run()
+    ```
+
+## Setting up the data
+
+1. Load the categories and categories to filter as incomes wanted in a file called `categories.json`
+   in `./load/categories/`. Such as:
+    ```json
+    {
+      "CATEGORIES": {
+        "CATEGORY_ONE": [
+          "TITLE TO CATEGORIZE"
+        ],
+        "CATEGORY_TWO": [
+          "TITLE 2 TO CATEGORIZE"
+        ]
+      },
+      "POSITIVE_CATEGORIES": [
+        "CATEGORY_TWO"
+      ]
+    }
+    ```
+
+2. Load your CSV files according to your bank under `./load/entries_files/{bank}` according to your bank.
+   See [Banks Supported](#banks-supported).
+
+3. Load any other CSV files in the folder `./load/entries_files/`. By default, those files will have this format:
+    ```csv
+    HEADER1;;;;;
+    HEADER2;;;;;
+    DATE;DATE TWO;TITLE;OTHER DATA;QUANTITY;OTHER
+    01/01/1999;01/01/1999;PAYCHECK;PAYCHECK FROM COMPANY 1;1.000;1.000
     ```
 
 ## Banks supported
