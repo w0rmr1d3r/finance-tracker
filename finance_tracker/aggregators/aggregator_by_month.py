@@ -45,7 +45,17 @@ class AggregatorByMonth:
         return self.INT_MONTH_TO_STR_CONVERTER.get(month)
 
     def aggregate_by_month(self, entries: list[CategorizedEntry]) -> dict[dict[str, Money]]:
-        # {"January": {"CAT1": 1.0, "CAT2": 2.0}, "February": {"CAT3": 1.0, "CAT4": 2.0}}
+        """
+        Will aggregate the given list of categorized entries by their month.
+        Will return a dict of keys being the months and the values a dict of each category with data for that month
+        aggregated by total of each entry of that category for that month.
+        Such as: {"January": {"CAT1": 1.0, "CAT2": 2.0}, "February": {"CAT3": 1.0, "CAT4": 2.0}}
+        Or None if given categories are None
+
+        :param entries: List of categorized entries to aggregate
+        :return: Dictionary with keys being the months and values the total amount of each category for each month.
+        None if given categories are None
+        """
         if entries is None:
             bcolors.print_warning("WARNING - entries are <None>. Will fail to aggregate them.")
             return {}
