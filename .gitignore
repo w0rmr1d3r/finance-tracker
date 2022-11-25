@@ -133,3 +133,4 @@ dmypy.json
 
 # Project files and folders
 load/**
+saved_files/**

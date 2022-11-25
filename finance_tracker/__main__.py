@@ -1,3 +1,4 @@
+import json
 import os
 import pathlib
 
@@ -90,6 +91,66 @@ def run() -> None:
     print("\n\n")
 
 
+def save_to_files():
+    # Init objects
+    current_path = pathlib.Path(__file__).parent.resolve()
+    category_searcher = CategorySearcher()
+    categorizer = Categorizer(category_searcher=category_searcher)
+    month_aggregator = AggregatorByMonth()
+    reader = EntryReader()
+    revolut_reader = RevolutReader()
+
+    # Looking for files
+    bcolors.print_green("Searching for files...")
+    entries_files = os.listdir(f"{current_path}/../load/entries_files/")
+    revolut_entries_files = os.listdir(f"{current_path}/../load/entries_files/revolut/")
+    bcolors.print_green(f"Found: {len(entries_files) - 1} files")
+    bcolors.print_green(f"Found: {len(revolut_entries_files) - 1} Revolut files")
+
+    # Read from files
+    bcolors.print_green("Reading entries from files...")
+    entries = []
+    for file in entries_files:
+        if file.endswith(".csv"):
+            entries.extend(
+                reader.read_from_file(
+                    path_to_file=f"{current_path}/../load/entries_files/{file}",
+                )
+            )
+
+    # Reading from Revolut files
+    bcolors.print_green("Reading entries from Revolut files...")
+    revolut_entries = []
+    for file in revolut_entries_files:
+        if file.endswith(".csv"):
+            revolut_entries.extend(
+                revolut_reader.read_from_file(
+                    path_to_file=f"{current_path}/../load/entries_files/revolut/{file}",
+                )
+            )
+
+    # We transform Revolut entries to Entry
+    for rev_entry in revolut_entries:
+        entries.append(Entry.from_revolut_entry(rev_entry))
+
+    bcolors.print_green("Setting categories for entries...")
+    categorizer.set_category_for_entries(uncategorized_entries=entries)
+
+    bcolors.print_green("Splitting entries into positives and negatives")
+    positive = [entry for entry in entries if entry.category in positive_categories()]
+    negative = [entry for entry in entries if entry.category in negative_categories()]
+
+    bcolors.print_green("Aggregating entries by month...")
+    positive_categories_quantities = month_aggregator.aggregate_by_month(entries=positive)
+    negative_categories_quantities = month_aggregator.aggregate_by_month(entries=negative)
+
+    with open("saved_files/positive.json", "w", encoding="utf-8") as f:
+        json.dump(positive_categories_quantities, f, ensure_ascii=False, indent=4)
+
+    with open("saved_files/negative.json", "w", encoding="utf-8") as f:
+        json.dump(negative_categories_quantities, f, ensure_ascii=False, indent=4)
+
+
 def menu() -> None:
     """
     Shows the menu with current options of the app.
@@ -99,9 +160,11 @@ def menu() -> None:
     """
     last_choice = None
     while True:
-        choice = inquirer.list_input("", choices=["run", "exit"], default=last_choice)
+        choice = inquirer.list_input("", choices=["run", "Save to files", "exit"], default=last_choice)
         if choice == "run":
             run()
+        elif choice == "Save to files":
+            save_to_files()
         elif choice == "exit":
             return
         last_choice = choice
