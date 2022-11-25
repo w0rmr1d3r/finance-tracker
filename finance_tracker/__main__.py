@@ -138,7 +138,7 @@ def save_to_files():
         json.dump(positive_categories_quantities, f, ensure_ascii=False, indent=4, cls=FinanceTrackerEncoder)
 
     with open("saved_files/negative.json", "w", encoding="utf-8") as f:
-        json.dump(negative_categories_quantities, f, ensure_ascii=False, indent=4,  cls=FinanceTrackerEncoder)
+        json.dump(negative_categories_quantities, f, ensure_ascii=False, indent=4, cls=FinanceTrackerEncoder)
 
 
 def menu() -> None:
