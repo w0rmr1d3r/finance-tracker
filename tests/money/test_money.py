@@ -1,6 +1,3 @@
-import json
-from unittest import TestCase
-
 from _pytest.python_api import raises
 from faker import Faker
 
