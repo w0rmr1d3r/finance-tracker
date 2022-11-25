@@ -6,6 +6,11 @@ DEFAULT_CATEGORY = "n/a"
 
 
 def all_categories():
+    """
+    Retrieves all the categories from the "categories.json" file.
+
+    :return: Python dict retrieved from the categories file
+    """
     current_path = pathlib.Path(__file__).parent.resolve()
     with open(f"{current_path}/../../load/categories/categories.json", "r", encoding="ASCII") as file:
         return json.load(file)
