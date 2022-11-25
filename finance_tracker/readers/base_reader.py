@@ -1,6 +1,10 @@
-class BaseReader:
+from abc import ABC, abstractmethod
+
+
+class BaseReader(ABC):
     _HEADERS_TO_IGNORE: int = 0
 
+    @abstractmethod
     def read_from_file(self, path_to_file: str) -> list:
         """
         Base method, please implement a strategy instead.
