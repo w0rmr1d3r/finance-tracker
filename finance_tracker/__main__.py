@@ -16,30 +16,13 @@ from finance_tracker.readers.entry_reader import EntryReader
 from finance_tracker.readers.revolut_reader import RevolutReader
 
 
-def run() -> None:
-    """
-    Runs the app.
-
-    :return: None
-    """
-    # Init objects
+def read_entries_from_files(entries):
+    bcolors.print_green("Searching for Default entries files...")
     current_path = pathlib.Path(__file__).parent.resolve()
-    category_searcher = CategorySearcher()
-    categorizer = Categorizer(category_searcher=category_searcher)
-    month_aggregator = AggregatorByMonth()
-    reader = EntryReader()
-    revolut_reader = RevolutReader()
-
-    # Looking for files
-    bcolors.print_green("Searching for files...")
     entries_files = os.listdir(f"{current_path}/../load/entries_files/")
-    revolut_entries_files = os.listdir(f"{current_path}/../load/entries_files/revolut/")
     bcolors.print_green(f"Found: {len(entries_files) - 1} files")
-    bcolors.print_green(f"Found: {len(revolut_entries_files) - 1} Revolut files")
-
-    # Read from files
+    reader = EntryReader()
     bcolors.print_green("Reading entries from files...")
-    entries = []
     for file in entries_files:
         if file.endswith(".csv"):
             entries.extend(
@@ -48,9 +31,14 @@ def run() -> None:
                 )
             )
 
-    # Reading from Revolut files
+
+def read_revolut_entries_from_files(revolut_entries):
+    bcolors.print_green("Searching for Revolut files...")
+    current_path = pathlib.Path(__file__).parent.resolve()
+    revolut_entries_files = os.listdir(f"{current_path}/../load/entries_files/revolut/")
+    bcolors.print_green(f"Found: {len(revolut_entries_files) - 1} Revolut files")
+    revolut_reader = RevolutReader()
     bcolors.print_green("Reading entries from Revolut files...")
-    revolut_entries = []
     for file in revolut_entries_files:
         if file.endswith(".csv"):
             revolut_entries.extend(
@@ -58,6 +46,26 @@ def run() -> None:
                     path_to_file=f"{current_path}/../load/entries_files/revolut/{file}",
                 )
             )
+
+
+def run() -> None:
+    """
+    Runs the app.
+
+    :return: None
+    """
+    # Init objects
+    category_searcher = CategorySearcher()
+    categorizer = Categorizer(category_searcher=category_searcher)
+    month_aggregator = AggregatorByMonth()
+
+    # Read from files
+    entries = []
+    read_entries_from_files(entries=entries)
+
+    # Reading from Revolut files
+    revolut_entries = []
+    read_revolut_entries_from_files(revolut_entries=revolut_entries)
 
     # We transform Revolut entries to Entry
     for rev_entry in revolut_entries:
@@ -93,41 +101,17 @@ def run() -> None:
 
 def save_to_files():
     # Init objects
-    current_path = pathlib.Path(__file__).parent.resolve()
     category_searcher = CategorySearcher()
     categorizer = Categorizer(category_searcher=category_searcher)
     month_aggregator = AggregatorByMonth()
-    reader = EntryReader()
-    revolut_reader = RevolutReader()
-
-    # Looking for files
-    bcolors.print_green("Searching for files...")
-    entries_files = os.listdir(f"{current_path}/../load/entries_files/")
-    revolut_entries_files = os.listdir(f"{current_path}/../load/entries_files/revolut/")
-    bcolors.print_green(f"Found: {len(entries_files) - 1} files")
-    bcolors.print_green(f"Found: {len(revolut_entries_files) - 1} Revolut files")
 
     # Read from files
-    bcolors.print_green("Reading entries from files...")
     entries = []
-    for file in entries_files:
-        if file.endswith(".csv"):
-            entries.extend(
-                reader.read_from_file(
-                    path_to_file=f"{current_path}/../load/entries_files/{file}",
-                )
-            )
+    read_entries_from_files(entries=entries)
 
     # Reading from Revolut files
-    bcolors.print_green("Reading entries from Revolut files...")
     revolut_entries = []
-    for file in revolut_entries_files:
-        if file.endswith(".csv"):
-            revolut_entries.extend(
-                revolut_reader.read_from_file(
-                    path_to_file=f"{current_path}/../load/entries_files/revolut/{file}",
-                )
-            )
+    read_revolut_entries_from_files(revolut_entries=revolut_entries)
 
     # We transform Revolut entries to Entry
     for rev_entry in revolut_entries:
