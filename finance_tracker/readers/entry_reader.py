@@ -14,17 +14,42 @@ def float_in_str_to_str(to_convert: str) -> float:
 
 
 class EntryReader(BaseReader):
+    """
+    Default reader of entries.
+    """
+
     _HEADERS_TO_IGNORE = 3
 
     def read_from_file(self, path_to_file: str) -> list:
+        """
+        Reads entries from the given file
+
+        :param path_to_file: Path to file with entries
+        :return: List of Entry
+        """
         return self.read_entries_from_file(headers_to_ignore=self._HEADERS_TO_IGNORE, path_to_file=path_to_file)
 
     @staticmethod
     def float_in_str_to_str(to_convert: str) -> float:
+        """
+        Converts float numbers in strings with the format of "1.000,00" to float numbers in Python
+
+        :param to_convert: float number within a string
+        :return: float converted
+        """
         return float(to_convert.replace(".", "").replace(",", "."))
 
-    # todo - test
+    @deprecated(reason="Use <read_from_file> instead from this class.", version="1.3.0")
     def read_entries_from_file(self, headers_to_ignore: int, path_to_file: str) -> list[Entry]:
+        """
+        DEPRECATED - Use read_from_file instead.
+
+        Reads entries from a given file. Will ignore a given amount of headers.
+
+        :param headers_to_ignore: Headers to ignore from file
+        :param path_to_file: Path to file with entries
+        :return: list of Entry objects
+        """
         entries = []
         with open(path_to_file, "r", encoding="UTF-8") as file:
             csvreader = csv.reader(file, dialect="excel", delimiter=";")
