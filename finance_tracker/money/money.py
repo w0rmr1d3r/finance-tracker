@@ -9,18 +9,15 @@ class CurrencyIsNotTheSameException(Exception):
     pass
 
 
-class Money(dict):
+class Money:
     """
     Class representing an amount with a currency.
     Money of different currency cannot operate between them, they need to be of the same currency.
-
-    Inherits from "dict" so it can be serialized to JSON.
     """
 
     def __init__(self, currency_code: CurrencyCodes, amount: float = 0.0):
         if currency_code is None:
             raise CurrencyCodeIsNoneException()
-        dict.__init__(self, amount=amount, currency_code=currency_code)
         self._amount = amount
         self._currency_code = currency_code
 

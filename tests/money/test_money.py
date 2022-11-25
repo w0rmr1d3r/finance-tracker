@@ -80,11 +80,3 @@ def test_cannot_sub_moneys_of_different_currency():
     money_two = Money(currency_code=currency_code_two, amount=3.0)
     with raises(CurrencyIsNotTheSameException):
         _ = money_one - money_two
-
-
-def test_money_is_json_serializable():
-    currency_code = Faker().currency_code()
-    money = Money(currency_code=currency_code)
-    money_dumped = json.dumps(money)
-    money_loaded = json.loads(money_dumped)
-    TestCase().assertDictEqual(money, money_loaded)

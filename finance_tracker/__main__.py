@@ -1,6 +1,7 @@
 import json
 import os
 import pathlib
+from json import JSONEncoder
 
 import inquirer
 from pandas import DataFrame
@@ -99,6 +100,11 @@ def run() -> None:
     print("\n\n")
 
 
+class FinanceTrackerEncoder(JSONEncoder):
+    def default(self, o):
+        return o.__dict__
+
+
 def save_to_files():
     # Init objects
     category_searcher = CategorySearcher()
@@ -129,10 +135,10 @@ def save_to_files():
     negative_categories_quantities = month_aggregator.aggregate_by_month(entries=negative)
 
     with open("saved_files/positive.json", "w", encoding="utf-8") as f:
-        json.dump(positive_categories_quantities, f, ensure_ascii=False, indent=4)
+        json.dump(positive_categories_quantities, f, ensure_ascii=False, indent=4, cls=FinanceTrackerEncoder)
 
     with open("saved_files/negative.json", "w", encoding="utf-8") as f:
-        json.dump(negative_categories_quantities, f, ensure_ascii=False, indent=4)
+        json.dump(negative_categories_quantities, f, ensure_ascii=False, indent=4,  cls=FinanceTrackerEncoder)
 
 
 def menu() -> None:
