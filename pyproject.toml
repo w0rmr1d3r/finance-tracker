@@ -42,7 +42,7 @@ black = "^22.10.0"
 faker = "^15.3.4"
 flake8 = "^5.0.4"
 isort = "^5.10.1"
-pylint = "^2.15.5"
+pylint = "^2.15.7"
 pytest = "^7.2"
 
 [build-system]
