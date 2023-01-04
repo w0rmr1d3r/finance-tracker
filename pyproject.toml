@@ -32,7 +32,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 Deprecated = "^1.2.13"
-inquirer = "^2.10.0"
+inquirer = ">=2.10,<4.0"
 pandas = "^1.5.0"
 # If this minimum Python version supported were to change, please update the classifiers and workflows too.
 python = "^3.9"
