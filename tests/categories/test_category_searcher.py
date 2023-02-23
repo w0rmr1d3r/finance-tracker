@@ -1,4 +1,3 @@
-import time
 from unittest.mock import MagicMock, patch
 
 from finance_tracker.categories.category_searcher import CategorySearcher
