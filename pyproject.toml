@@ -1,6 +1,7 @@
 [tool.poetry]
 name = "finance-tracker"
-version = "1.3.0"
+# On a major release, update SECURITY.md accordingly
+version = "1.4.0"
 description = "Python tool to track finances over a year"
 license = "MIT"
 authors = ["w0rmr1d3r"]
