@@ -5,13 +5,10 @@ categories:
     labels:
       - 'enhancement'
       - 'feature'
-      - 'major'
-      - 'minor'
   - title: 'Bug Fixes'
     labels:
       - 'fix'
       - 'bug'
-      - 'patch'
   - title: 'Security'
     labels:
       - 'security'
