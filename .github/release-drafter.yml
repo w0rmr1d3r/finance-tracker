@@ -20,7 +20,7 @@ categories:
       - 'documentation'
   - title: 'Bumps'
     labels:
-      - 'bump'
+      - 'dependencies'
 version-resolver:
   major:
     labels:

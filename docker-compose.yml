@@ -1,0 +1,15 @@
+services:
+  backend:
+    build: ./backend
+    volumes:
+      - ./backend/load:/app/load
+      - ./backend/saved_files:/app/saved_files
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend

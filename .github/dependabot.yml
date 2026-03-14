@@ -6,22 +6,42 @@
 version: 2
 updates:
   - package-ecosystem: "pip"
+    directory: "/backend"
+    schedule:
+      interval: "monthly"
+    cooldown:
+      default-days: 7
+    assignees:
+      - "w0rmr1d3r"
+    reviewers:
+      - "w0rmr1d3r"
+  - package-ecosystem: "npm"
+    directory: "/frontend"
+    schedule:
+      interval: "monthly"
+    cooldown:
+      default-days: 7
+    assignees:
+      - "w0rmr1d3r"
+    reviewers:
+      - "w0rmr1d3r"
+  - package-ecosystem: "docker"
     directory: "/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
     assignees:
       - "w0rmr1d3r"
-    labels:
-      - "bump"
     reviewers:
       - "w0rmr1d3r"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
+    cooldown:
+      default-days: 7
     assignees:
       - "w0rmr1d3r"
-    labels:
-      - "bump"
     reviewers:
       - "w0rmr1d3r"
