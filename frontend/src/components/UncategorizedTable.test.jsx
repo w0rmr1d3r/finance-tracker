@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { describe, it, expect } from 'vitest'
 import { UncategorizedTable } from './UncategorizedTable'
 
-function makeEntry(title, date = '2024-01-01', amount = '10') {
+function makeEntry(title, date = '01/01/2024', amount = '10') {
   return {
     entry_date: date,
     title,
@@ -34,8 +34,8 @@ describe('UncategorizedTable search', () => {
 describe('UncategorizedTable sort', () => {
   it('toggles sort direction on second click', () => {
     const entries = [
-      makeEntry('A', '2024-01-01'),
-      makeEntry('B', '2024-06-01'),
+      makeEntry('A', '01/01/2024'),
+      makeEntry('B', '01/06/2024'),
     ]
     render(<UncategorizedTable entries={entries} />)
     const dateHeader = screen.getByText(/Date/)
@@ -44,6 +44,18 @@ describe('UncategorizedTable sort', () => {
     // Just ensure it doesn't throw — actual order is tested by integration
     expect(screen.getByText('A')).toBeInTheDocument()
     expect(screen.getByText('B')).toBeInTheDocument()
+  })
+
+  it('sorts dates chronologically ascending', () => {
+    const entries = [
+      makeEntry('Later', '15/06/2024'),
+      makeEntry('Earlier', '03/01/2024'),
+    ]
+    render(<UncategorizedTable entries={entries} />)
+    fireEvent.click(screen.getByText(/Date/))
+    const rows = screen.getAllByRole('row').slice(1) // skip header
+    expect(rows[0]).toHaveTextContent('Earlier')
+    expect(rows[1]).toHaveTextContent('Later')
   })
 })
 

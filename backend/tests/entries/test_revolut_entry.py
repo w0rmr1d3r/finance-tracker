@@ -39,5 +39,5 @@ def test_revolut_entry_dates_for_entry(revolut_entry):
     assert revolut_entry.started_date == "2022-10-02 15:01:02"
     assert revolut_entry.completed_date == "2022-10-03 15:01:02"
     # we don't care about smaller time units
-    assert revolut_entry.started_date_for_entry() == "2/10/2022"
-    assert revolut_entry.completed_date_for_entry() == "3/10/2022"
+    assert revolut_entry.started_date_for_entry() == "02/10/2022"
+    assert revolut_entry.completed_date_for_entry() == "03/10/2022"

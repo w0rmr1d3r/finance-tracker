@@ -25,9 +25,9 @@ def test_entry_dates_as_time(entry):
 
 def test_entry_from_revolut_entry(revolut_entry):
     entry = Entry.from_revolut_entry(revolut_entry)
-    assert entry.entry_date == "2/10/2022"
+    assert entry.entry_date == "02/10/2022"
     assert entry.date_as_time() == date(day=2, month=10, year=2022)
-    assert entry.date_of_action == "3/10/2022"
+    assert entry.date_of_action == "03/10/2022"
     assert entry.date_of_action_as_time() == date(day=3, month=10, year=2022)
     assert entry.title == "Supermarket purchase"
     assert not entry.other_data

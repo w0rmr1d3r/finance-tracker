@@ -31,12 +31,17 @@ export function UncategorizedTable({ entries }) {
     e.title.toLowerCase().includes(search.toLowerCase())
   )
 
+  function parseDMY(s) {
+    const [d, m, y] = s.split('/')
+    return new Date(+y, +m - 1, +d).getTime()
+  }
+
   const sorted = [...filtered].sort((a, b) => {
     if (!sortCol) return 0
     let va, vb
     if (sortCol === 'date') {
-      va = a.entry_date
-      vb = b.entry_date
+      va = parseDMY(a.entry_date)
+      vb = parseDMY(b.entry_date)
     } else {
       va = Number(a.quantity._amount)
       vb = Number(b.quantity._amount)

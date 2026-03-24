@@ -50,8 +50,7 @@ class RevolutEntry:
 
         :return: Formatted started_date string
         """
-        s_date = self.started_date_as_time()
-        return f"{s_date.day}/{s_date.month}/{s_date.year}"
+        return self.started_date_as_time().strftime("%d/%m/%Y")
 
     def completed_date_as_time(self) -> date:
         """
@@ -67,8 +66,7 @@ class RevolutEntry:
 
         :return: Formatted completed_date string
         """
-        c_date = self.completed_date_as_time()
-        return f"{c_date.day}/{c_date.month}/{c_date.year}"
+        return self.completed_date_as_time().strftime("%d/%m/%Y")
 
     def month_from_started_date(self) -> int:
         """
