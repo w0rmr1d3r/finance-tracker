@@ -36,6 +36,8 @@ jobs:
 
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@05fe4576374b728f0c523d6a13d64c25081e0803 # v4.8.3
+        with:
+          fail-on-severity: "high"
 
   backend-tests:
     runs-on: ubuntu-latest
