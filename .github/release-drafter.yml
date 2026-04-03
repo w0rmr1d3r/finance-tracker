@@ -19,6 +19,10 @@ categories:
     labels:
       - 'documentation'
       - 'docs'
+  - title: 'CI/CD'
+    labels:
+      - 'ci'
+      - 'cd'
   - title: 'Frontend bumps'
     labels:
       - 'javascript'
