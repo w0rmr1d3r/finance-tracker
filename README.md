@@ -121,8 +121,8 @@ On startup the backend server automatically processes all entries and writes fou
 - Revolut
 - Santander
 
-Any other bank can be supported by implementing a new reader or by formatting your export as the default CSV (see step 3
-of [Setting up the data](#setting-up-the-data)).
+Any other bank can be supported by implementing a new reader or by formatting your export as the default CSV (see
+[Setting up the data](#setting-up-the-data)).
 
 ## Development
 
