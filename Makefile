@@ -1,40 +1,39 @@
 install:
-	poetry install --only main
+	$(MAKE) -C backend install
 
 install-dev:
-	poetry install
-
-update:
-	poetry update
-
-lock:
-	poetry lock
-
-lock-refresh:
-	poetry lock --no-update
-
-run:
-	poetry run python3 finance_tracker/__main__.py
-
-test:
-	poetry run pytest -svvvv
-
-lint:
-	poetry run isort --check-only .
-	poetry run black --check finance_tracker/ tests/
-	poetry run flake8 finance_tracker/ tests/
-
-py-lint:
-	poetry run pylint finance_tracker/
-
-py-lint-test:
-	poetry run pylint --disable=C0116 tests/
+	$(MAKE) -C backend install-dev
 
 format:
-	poetry run isort --float-to-top .
-	poetry run black finance_tracker/ tests/
+	$(MAKE) -C backend format
 
-build:
-	poetry build
+lint:
+	$(MAKE) -C backend lint
 
-.PHONY: install install-dev update lock lock-refresh run setup-test test lint py-lint py-lint-test format build
+test:
+	$(MAKE) -C backend test
+
+lock:
+	$(MAKE) -C backend lock
+
+lock-upgrade:
+	$(MAKE) -C backend lock-upgrade
+
+frontend-install:
+	$(MAKE) -C frontend install
+
+frontend-test:
+	$(MAKE) -C frontend test
+
+frontend-build:
+	$(MAKE) -C frontend build
+
+docker-build:
+	docker compose build
+
+docker-run:
+	docker compose up
+
+.PHONY: install install-dev format lint test lock lock-upgrade \
+        frontend-install frontend-test frontend-build \
+        docker-build docker-run

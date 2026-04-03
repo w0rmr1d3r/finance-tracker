@@ -1,0 +1,90 @@
+[project]
+name = "finance-tracker"
+# Make sure this matches the description in GitHub, in the README.md and in the cli.
+description = "Python tool to track finances over a year"
+readme = "README.md"
+authors = [{ "name" = "w0rmr1d3r" }]
+license = { text = "MIT" }
+# Make sure this matches the keywords in GitHub
+keywords = ["finance", "tracker"] #todo
+
+# On a major release, update SECURITY.md accordingly
+version = "2.0.0"
+# Supported Python 3.14.x only
+# If the supported version changes, update -> CI
+requires-python = ">=3.14, <3.15"
+
+# Always try to be compatible with these versions and above
+dependencies = [
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0",
+]
+
+[dependency-groups]
+# Always try to be compatible with these versions and above
+dev = [
+    "faker>=15.0.0",
+    "httpx>=0.28.1",
+    "pytest>=7.0.0",
+    "ruff==0.9.2", # still in 0.x introducing breaking changes
+]
+
+[tool.uv]
+package = false
+index = [
+    { name = "pypi", url = "https://pypi.org/simple/", default = true },
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = [
+    "E", # default - pycodestyle error
+    "F", # default - pyflakes
+    "FIX", #flake8-fixme
+    "I", # isort
+    "RUF", # ruff specific rules
+    "D", # pydocstyle
+    "PL", # pylint - not 100% implemented, see: https://github.com/astral-sh/ruff/issues/970
+]
+
+ignore = [
+    "D100", # docstring in public module - does not yet apply
+    "D104", # docstring in public package - does not yet apply
+    "D105", # Missing docstring in magic method
+    "D107", # Missing docstring in `__init__`
+    "D200", # One-line docstring should fit on one line
+    "D203", # incorrect-blank-line-before-class - in favor of D211 no-blank-line-before-class
+    "D205", # 1 blank line required between summary line and description
+    "D212", # multi-line-summary-first-line - in favor of D213 multi-line-summary-second-line
+    "D400", # First line should end with a period
+    "D401", # First line of docstring should be in imperative mood
+    "D415", # First line should end with a period, question mark, or exclamation point
+]
+
+# Allow fix for all enabled rules (when `--fix`) is provided.
+fixable = ["ALL"]
+preview = true
+
+[tool.ruff.lint.per-file-ignores]
+"*test*.py" = [
+    "D", # ignore all docstring lints in tests
+    "PLR2004", # ignore magic numbers rule in tests
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+docstring-code-format = true
+
+# Set the line length limit used when formatting code snippets in
+# docstrings.
+# This only has an effect when the `docstring-code-format` setting is
+# enabled.
+docstring-code-line-length = 90
