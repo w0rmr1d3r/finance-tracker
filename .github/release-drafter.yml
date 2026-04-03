@@ -18,9 +18,17 @@ categories:
   - title: 'Documentation'
     labels:
       - 'documentation'
-  - title: 'Bumps'
+      - 'docs'
+  - title: 'CI bumps'
     labels:
-      - 'dependencies'
+      - 'github_actions'
+  - title: 'Frontend bumps'
+    labels:
+      - 'javascript'
+  - title: 'Backend bumps'
+    labels:
+      - 'python'
+      - 'python:uv'
 version-resolver:
   major:
     labels:
@@ -33,6 +41,4 @@ version-resolver:
       - 'patch'
   default: minor
 template: |
-  # Changes
-
   $CHANGES
