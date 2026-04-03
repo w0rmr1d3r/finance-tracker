@@ -102,7 +102,7 @@ On startup the backend server automatically processes all entries and writes fou
     01/01/1999;PAYCHECK;PAYCHECK FROM COMPANY 1;1000,00
     ```
 
-2. `./backend/load/categories.json` is created empty by `setup.sh` — you can leave it as-is and categorise entries later
+2. `./backend/load/categories/categories.json` is created empty by `setup.sh` — you can leave it as-is and categorise entries later
    via the UI, or pre-fill it:
     ```json
     {
