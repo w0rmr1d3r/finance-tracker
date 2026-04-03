@@ -6,7 +6,7 @@ mkdir -p backend/load/entries_files/revolut
 mkdir -p backend/load/entries_files/santander
 mkdir -p backend/saved_files
 
-cat > backend/load/categories.json << 'EOF'
+cat > backend/load/categories/categories.json << 'EOF'
 {
     "CATEGORIES": {
     },
