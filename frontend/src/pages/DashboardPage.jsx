@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useData } from '../context/DataContext'
-import { sumMonth, getLatestMonth, formatMoney, MONTHS } from '../utils/finance'
+import { sumMonth, getLatestMonth, formatMoney } from '../utils/finance'
 import SummaryCard from '../components/SummaryCard'
 import MonthSelector from '../components/MonthSelector'
 import IncomeExpensesChart from '../charts/IncomeExpensesChart'
