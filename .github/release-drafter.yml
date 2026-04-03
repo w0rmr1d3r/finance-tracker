@@ -19,9 +19,6 @@ categories:
     labels:
       - 'documentation'
       - 'docs'
-  - title: 'CI bumps'
-    labels:
-      - 'github_actions'
   - title: 'Frontend bumps'
     labels:
       - 'javascript'
@@ -29,6 +26,12 @@ categories:
     labels:
       - 'python'
       - 'python:uv'
+  - title: 'CI bumps'
+    labels:
+      - 'github_actions'
+  - title: 'Other bumps'
+    labels:
+      - 'dependencies'
 version-resolver:
   major:
     labels:
