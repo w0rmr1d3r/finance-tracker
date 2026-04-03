@@ -24,6 +24,7 @@ dependencies = [
 # Always try to be compatible with these versions and above
 dev = [
     "faker>=15.0.0",
+    "httpx>=0.28.1",
     "pytest>=7.0.0",
     "ruff==0.9.2", # still in 0.x introducing breaking changes
 ]

@@ -262,6 +262,7 @@ def assign_category(req: AssignCategoryRequest):
     with open(categories_path, "w", encoding="ASCII") as f:
         json.dump(current_cats, f, ensure_ascii=True, indent=4)
 
+    CategorySearcher.search_category.cache_clear()
     _save_entries()
 
     saved_files_path = pathlib.Path(__file__).parent.resolve() / ".." / "saved_files"
@@ -323,6 +324,9 @@ def delete_category(name: str):
     categories_path = pathlib.Path(__file__).parent.resolve() / ".." / "load" / "categories" / "categories.json"
     with open(categories_path, "w", encoding="ASCII") as f:
         json.dump(current_cats, f, ensure_ascii=True, indent=4)
+
+    CategorySearcher.search_category.cache_clear()
+    _save_entries()
 
     return JSONResponse(
         {
