@@ -17,13 +17,33 @@ finance-tracker/
 
 ## Usage
 
-### Docker (recommended)
+### Docker with pre-built images (recommended)
+
+No need to clone the full repo — uses published images from the container registry.
+
+1. Install [Docker](https://docs.docker.com/get-docker/)
+2. Download `docker-compose-example.yml` from this repo and rename it `docker-compose.yml`
+3. Run `setup.sh` to create the required directory structure and a starter `categories.json`:
+   ```bash
+   bash setup.sh
+   ```
+4. Edit the `volumes` paths in `docker-compose.yml` to point to the `backend/load` and `backend/saved_files` directories
+   created by the script (use absolute paths)
+5. Set up the data as explained [here](#setting-up-the-data)
+6. Run `docker compose up -d`
+7. Open the UI at `http://localhost` and the API at `http://localhost:8000`
+
+### Docker (from source)
 
 1. Clone the repo
 2. Install [Docker](https://docs.docker.com/get-docker/)
-3. Set up the data as explained [here](#setting-up-the-data)
-4. Run `make docker-build` and then `make docker-run`
-5. Open the UI at `http://localhost` and the API at `http://localhost:8000`
+3. Run `setup.sh` to create the required directory structure:
+   ```bash
+   bash setup.sh
+   ```
+4. Set up the data as explained [here](#setting-up-the-data)
+5. Run `make docker-build` and then `make docker-run`
+6. Open the UI at `http://localhost` and the API at `http://localhost:8000`
 
 #### Startup behaviour
 
@@ -74,61 +94,55 @@ On startup the backend server automatically processes all entries and writes fou
 
 ## Setting up the data
 
-1. Create a `categories.json` file in `./backend/load/categories/` defining your expense and income
-   categories. Each category maps to a list of entry title keywords; any entry whose title matches
-   a keyword is assigned that category. Categories listed under `POSITIVE_CATEGORIES` are treated
-   as income — all others are treated as expenses.
-    ```json
-    {
-      "CATEGORIES": {
-        "CATEGORY_ONE": [
-          "TITLE TO CATEGORIZE"
-        ],
-        "CATEGORY_TWO": [
-          "TITLE 2 TO CATEGORIZE"
-        ]
-      },
-      "POSITIVE_CATEGORIES": [
-        "CATEGORY_TWO"
-      ]
-    }
-    ```
-
-2. Load your CSV files according to your bank under `./backend/load/entries_files/{bank}`.
-   See [Banks Supported](#banks-supported).
-
-3. Load any other CSV files in `./backend/load/entries_files/`. By default, those files use this format:
+1. Drop your CSV files into `./backend/load/entries_files/` — either directly (default format) or under a bank
+   subfolder (e.g. `revolut/`, `santander/`). See [Banks supported](#banks-supported).
+   Default CSV format:
     ```csv
     DATE;TITLE;DESCRIPTION;QUANTITY
     01/01/1999;PAYCHECK;PAYCHECK FROM COMPANY 1;1000,00
     ```
+
+2. `./backend/load/categories.json` is created empty by `setup.sh` — you can leave it as-is and categorise entries later
+   via the UI, or pre-fill it:
+    ```json
+    {
+      "CATEGORIES": {
+        "CATEGORY_ONE": ["TITLE TO CATEGORIZE"],
+        "CATEGORY_TWO": ["TITLE 2 TO CATEGORIZE"]
+      },
+      "POSITIVE_CATEGORIES": ["CATEGORY_TWO"]
+    }
+    ```
+   Each category maps entry title keywords to a category name. Categories in `POSITIVE_CATEGORIES` are treated as
+   income; all others as expenses.
 
 ## Banks supported
 
 - Revolut
 - Santander
 
-Any other bank can be supported by implementing a new reader or by formatting your export as the default CSV (see step 3 of [Setting up the data](#setting-up-the-data)).
+Any other bank can be supported by implementing a new reader or by formatting your export as the default CSV (see step 3
+of [Setting up the data](#setting-up-the-data)).
 
 ## Development
 
 ### Makefile targets
 
-| Target | Description |
-|--------|-------------|
-| `make install` | Install backend production dependencies |
-| `make install-dev` | Install backend development dependencies |
-| `make test` | Run backend tests |
-| `make lint` | Lint backend code |
-| `make format` | Format backend code |
-| `make run` | Run backend locally |
-| `make lock` | Lock backend dependencies |
-| `make lock-upgrade` | Upgrade and re-lock backend dependencies |
+| Target                  | Description                              |
+|-------------------------|------------------------------------------|
+| `make install`          | Install backend production dependencies  |
+| `make install-dev`      | Install backend development dependencies |
+| `make test`             | Run backend tests                        |
+| `make lint`             | Lint backend code                        |
+| `make format`           | Format backend code                      |
+| `make run`              | Run backend locally                      |
+| `make lock`             | Lock backend dependencies                |
+| `make lock-upgrade`     | Upgrade and re-lock backend dependencies |
 | `make frontend-install` | Install frontend dependencies (`npm ci`) |
-| `make frontend-test` | Run frontend tests (Vitest) |
-| `make frontend-build` | Build frontend for production |
-| `make docker-build` | Build Docker images |
-| `make docker-run` | Start all services via Docker Compose |
+| `make frontend-test`    | Run frontend tests (Vitest)              |
+| `make frontend-build`   | Build frontend for production            |
+| `make docker-build`     | Build Docker images                      |
+| `make docker-run`       | Start all services via Docker Compose    |
 
 ### Running tests
 

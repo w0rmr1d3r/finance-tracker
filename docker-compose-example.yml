@@ -1,0 +1,20 @@
+---
+services:
+  backend:
+    image: ghcr.io/w0rmr1d3r/finance-tracker-backend:latest
+    container_name: backend
+    ports:
+      - "8000:8000" # Adjust your machine port to an unused port
+    volumes:
+      - /path/to/backend/load:/app/load
+      - /path/to/backend/saved_files:/app/saved_files
+    restart: unless-stopped
+
+  frontend:
+    image: ghcr.io/w0rmr1d3r/finance-tracker-frontend:latest
+    container_name: frontend
+    ports:
+      - "80:80" # Adjust your machine port to an unused port
+    depends_on:
+      - backend
+    restart: unless-stopped
