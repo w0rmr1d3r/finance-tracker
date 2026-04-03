@@ -27,12 +27,16 @@ finance-tracker/
 
 #### Startup behaviour
 
-On startup the backend server automatically processes all entries and writes
-`backend/saved_files/positive.json` and `backend/saved_files/negative.json`.
+On startup the backend server automatically processes all entries and writes four files under `backend/saved_files/`:
+
+- `positive.json` — income entries aggregated by month and category
+- `negative.json` — expense entries aggregated by month and category
+- `uncategorized.json` — entries that did not match any category keyword
+- `all_entries.json` — every individual entry (all banks combined)
 
 #### API endpoints
 
-- `GET /data` — reads and returns the saved aggregated results:
+- `GET /data` — returns aggregated income, expenses, and uncategorized entries:
     ```json
     {
       "positive": { "<month>": { "<category>": { "_amount": "...", "_currency_code": "..." } } },
@@ -40,6 +44,17 @@ On startup the backend server automatically processes all entries and writes
       "uncategorized": [ { "entry_date": "...", "title": "...", "other_data": "...", "quantity": { "_amount": "...", "_currency_code": "..." } } ]
     }
     ```
+- `GET /entries` — returns all individual entries across all banks
+- `GET /categories` — returns the current category definitions and which are income categories
+- `POST /categories/assign` — assigns an entry title to a category and re-processes entries
+    ```json
+    { "title": "ENTRY TITLE", "category": "CATEGORY_NAME" }
+    ```
+- `POST /categories/create` — creates a new category
+    ```json
+    { "name": "CATEGORY_NAME", "type": "expense" }
+    ```
+- `DELETE /categories/{name}` — deletes a category and re-processes entries
 
 ### From repository (local)
 
@@ -59,8 +74,10 @@ On startup the backend server automatically processes all entries and writes
 
 ## Setting up the data
 
-1. Load the categories and categories to filter as incomes wanted in a file called `categories.json`
-   in `./backend/load/categories/`. Such as:
+1. Create a `categories.json` file in `./backend/load/categories/` defining your expense and income
+   categories. Each category maps to a list of entry title keywords; any entry whose title matches
+   a keyword is assigned that category. Categories listed under `POSITIVE_CATEGORIES` are treated
+   as income — all others are treated as expenses.
     ```json
     {
       "CATEGORIES": {
@@ -88,11 +105,10 @@ On startup the backend server automatically processes all entries and writes
 
 ## Banks supported
 
-_Any other bank needs to be implemented or follow the current default CSV_
-
 - Revolut
 - Santander
-- MORE TO COME
+
+Any other bank can be supported by implementing a new reader or by formatting your export as the default CSV (see step 3 of [Setting up the data](#setting-up-the-data)).
 
 ## Development
 
