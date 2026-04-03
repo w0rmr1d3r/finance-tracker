@@ -90,7 +90,7 @@ jobs:
 
   codeql:
     runs-on: ubuntu-latest
-    needs: [backend-tests, frontend-tests]
+    needs: [dependency-review]
     permissions:
       security-events: write
 
@@ -120,7 +120,7 @@ jobs:
 
   docker-build:
     runs-on: ubuntu-latest
-    needs: [codeql]
+    needs: [backend-tests, frontend-tests, codeql]
     name: Docker Build
     steps:
       - name: Checkout repository
