@@ -1,10 +1,9 @@
 ## What?
 <!---
-Describe shortly what is happening in this PR.
-Add here any related issues if applies
+Describe what the change is about.
+Link any related issue or PR if applicable.
 --->
 
 ## Checklist
-- [ ] Label added to the PR (major, minor, patch, bump, etc.)
-- [ ] PR up to date with default branch
-- [ ] All checks are green
+- [ ] Label added to the PR (`major`, `minor`, `patch`, etc.)
+- [ ] Type of change label added to the PR (`documentation`, `bug`, `feature`, etc.)
