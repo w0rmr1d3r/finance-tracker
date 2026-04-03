@@ -1,15 +1,7 @@
 [project]
 name = "finance-tracker"
-# Make sure this matches the description in GitHub, in the README.md and in the cli.
-description = "Python tool to track finances over a year"
-readme = "README.md"
-authors = [{ "name" = "w0rmr1d3r" }]
-license = { text = "MIT" }
-# Make sure this matches the keywords in GitHub
-keywords = ["finance", "tracker"] #todo
-
-# On a major release, update SECURITY.md accordingly
-version = "2.0.0"
+# Version is tracked in GitHub
+version = "0.0.0"
 # Supported Python 3.14.x only
 # If the supported version changes, update -> CI
 requires-python = ">=3.14, <3.15"
