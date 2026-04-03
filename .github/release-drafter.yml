@@ -33,9 +33,6 @@ categories:
   - title: 'CI bumps'
     labels:
       - 'github_actions'
-  - title: 'Other bumps'
-    labels:
-      - 'dependencies'
 version-resolver:
   major:
     labels:
