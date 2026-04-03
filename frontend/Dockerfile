@@ -19,7 +19,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
-LABEL org.opencontainers.image.source=https://github.com/w0rmr1d3r/finance-tracker
-LABEL org.opencontainers.image.licenses=MIT
+LABEL org.opencontainers.image.source=https://github.com/w0rmr1d3r/finance-tracker \
+      org.opencontainers.image.licenses=MIT
 
 CMD ["nginx", "-g", "daemon off;"]
