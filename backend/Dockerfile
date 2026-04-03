@@ -17,7 +17,7 @@ ENV PYTHONUNBUFFERED=1
 
 EXPOSE 8000
 
-LABEL org.opencontainers.image.source=https://github.com/w0rmr1d3r/finance-tracker \
+LABEL org.opencontainers.image.source=https://github.com/w0rmr1d3r/finance-tracker/tree/main/backend \
       org.opencontainers.image.licenses=MIT
 
 CMD ["python", "entrypoint.py"]
