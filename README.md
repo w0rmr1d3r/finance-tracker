@@ -23,7 +23,7 @@ No need to clone the full repo — uses published images from the container regi
 
 1. Install [Docker](https://docs.docker.com/get-docker/)
 2. Download `docker-compose-example.yml` from this repo and rename it `docker-compose.yml`
-3. Run `setup.sh` to create the required directory structure and a starter `categories.json`:
+3. Download and run `setup.sh` to create the required directory structure and a starter `categories.json`:
    ```bash
    bash setup.sh
    ```
