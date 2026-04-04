@@ -21,7 +21,7 @@ SAMPLE_CATS = {
 def client():
     """Return a TestClient with lifespan (startup _save_entries) suppressed."""
     with patch("finance_tracker.__main__._save_entries"):
-        from finance_tracker.__main__ import app  # noqa: PLC0415, PLC2701
+        from finance_tracker.__main__ import app  # noqa: PLC0415
 
         with TestClient(app, raise_server_exceptions=True) as c:
             yield c
