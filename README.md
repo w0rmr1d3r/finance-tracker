@@ -94,7 +94,12 @@ On startup the backend server automatically processes all entries and writes fou
 
 ## Setting up the data
 
-1. Drop your CSV files into `./backend/load/entries_files/` — either directly (default format) or under a bank
+1. Run `setup.sh` to create the required directory structure (skip if you already ran it during setup):
+   ```bash
+   bash setup.sh
+   ```
+
+2. Drop your CSV files into `./backend/load/entries_files/` — either directly (default format) or under a bank
    subfolder (e.g. `revolut/`, `santander/`). See [Banks supported](#banks-supported).
    Default CSV format:
     ```csv
@@ -102,7 +107,7 @@ On startup the backend server automatically processes all entries and writes fou
     01/01/1999;PAYCHECK;PAYCHECK FROM COMPANY 1;1000,00
     ```
 
-2. `./backend/load/categories/categories.json` is created empty by `setup.sh` — you can leave it as-is and categorise entries later
+3. `./backend/load/categories/categories.json` is created empty by `setup.sh` — you can leave it as-is and categorise entries later
    via the UI, or pre-fill it:
     ```json
     {
