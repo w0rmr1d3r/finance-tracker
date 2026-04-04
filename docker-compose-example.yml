@@ -2,7 +2,7 @@
 services:
   backend:
     image: ghcr.io/w0rmr1d3r/finance-tracker-backend:latest
-    # Optional, use images with digest (like so vor v2.0.0):
+    # Optional, use images with digest (like so for v2.0.0):
     # image: ghcr.io/w0rmr1d3r/finance-tracker-backend:2.0.0@sha256:d5a376b638d07facd8a199d869f6acaf08158160ab94eb6321042d821bfb24c4
     container_name: backend
     ports:
@@ -14,7 +14,7 @@ services:
 
   frontend:
     image: ghcr.io/w0rmr1d3r/finance-tracker-frontend:latest
-    # Optional, use images with digest (like so vor v2.0.0):
+    # Optional, use images with digest (like so for v2.0.0):
     # image: ghcr.io/w0rmr1d3r/finance-tracker-backend:2.0.0@sha256:9bad9cb27de70e0d1aa88ebbff8ea7a9a5f52ffe43b30f0dba5c88cad8b207df
     container_name: frontend
     ports:
