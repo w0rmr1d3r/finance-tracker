@@ -1,5 +1,6 @@
 import csv
 
+from finance_tracker.constants import ENCODING
 from finance_tracker.entries.revolut_entry import RevolutEntry
 from finance_tracker.readers.base_reader import BaseReader
 
@@ -19,7 +20,7 @@ class RevolutReader(BaseReader):
         :return: list of RevolutEntry
         """
         entries = []
-        with open(path_to_file, "r", encoding="ASCII") as file:
+        with open(path_to_file, "r", encoding=ENCODING) as file:
             csvreader = csv.reader(file, dialect="excel", delimiter=",")
             for _ in range(self._HEADERS_TO_IGNORE):
                 next(csvreader)

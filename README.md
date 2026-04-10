@@ -101,11 +101,17 @@ On startup the backend server automatically processes all entries and writes fou
 
 2. Drop your CSV files into `./backend/load/entries_files/` — either directly (default format) or under a bank
    subfolder (e.g. `revolut/`, `santander/`). See [Banks supported](#banks-supported).
-   Default CSV format:
+   Default CSV format (comma-delimited, standard decimal):
+    ```csv
+    DATE,TITLE,DESCRIPTION,QUANTITY
+    01/01/1999,PAYCHECK,PAYCHECK FROM COMPANY 1,1000.00
+    ```
+   Also accepted (semicolon-delimited, European decimal):
     ```csv
     DATE;TITLE;DESCRIPTION;QUANTITY
     01/01/1999;PAYCHECK;PAYCHECK FROM COMPANY 1;1000,00
     ```
+   The delimiter is detected automatically from the header line.
 
 3. `./backend/load/categories/categories.json` is created empty by `setup.sh` — you can leave it as-is and categorise entries later
    via the UI, or pre-fill it:

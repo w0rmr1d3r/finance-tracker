@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import date, datetime
 
+from finance_tracker.constants import DATE_AS_TIME_FORMAT, DATE_FORMAT
 from finance_tracker.money.currency_codes import CurrencyCodes
 from finance_tracker.money.money import Money
 
@@ -42,7 +43,7 @@ class RevolutEntry:
 
         :return: Date object from started_date
         """
-        return datetime.strptime(self.started_date, "%Y-%m-%d %H:%M:%S").date()
+        return datetime.strptime(self.started_date, DATE_AS_TIME_FORMAT).date()
 
     def started_date_for_entry(self) -> str:
         """
@@ -50,7 +51,7 @@ class RevolutEntry:
 
         :return: Formatted started_date string
         """
-        return self.started_date_as_time().strftime("%d/%m/%Y")
+        return self.started_date_as_time().strftime(DATE_FORMAT)
 
     def completed_date_as_time(self) -> date:
         """
@@ -58,7 +59,7 @@ class RevolutEntry:
 
         :return: Date object from completed_date
         """
-        return datetime.strptime(self.completed_date, "%Y-%m-%d %H:%M:%S").date()
+        return datetime.strptime(self.completed_date, DATE_AS_TIME_FORMAT).date()
 
     def completed_date_for_entry(self) -> str:
         """
@@ -66,7 +67,7 @@ class RevolutEntry:
 
         :return: Formatted completed_date string
         """
-        return self.completed_date_as_time().strftime("%d/%m/%Y")
+        return self.completed_date_as_time().strftime(DATE_FORMAT)
 
     def month_from_started_date(self) -> int:
         """

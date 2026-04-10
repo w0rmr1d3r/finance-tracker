@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from finance_tracker.categories.categories import DEFAULT_CATEGORY
+from finance_tracker.constants import DEFAULT_CATEGORY
 from finance_tracker.entries.entry import Entry
 
 

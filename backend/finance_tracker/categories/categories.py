@@ -2,8 +2,7 @@ import json
 import pathlib
 from typing import Set
 
-DEFAULT_CATEGORY = "n/a"
-DEFAULT_CATEGORIES = {"CATEGORIES": {}, "POSITIVE_CATEGORIES": []}
+from finance_tracker.constants import DEFAULT_CATEGORIES, DEFAULT_CATEGORY, ENCODING
 
 
 def all_categories():
@@ -15,7 +14,7 @@ def all_categories():
     """
     current_path = pathlib.Path(__file__).parent.resolve()
     try:
-        with open(f"{current_path}/../../load/categories/categories.json", "r", encoding="ASCII") as file:
+        with open(f"{current_path}/../../load/categories/categories.json", "r", encoding=ENCODING) as file:
             return json.load(file)
     except FileNotFoundError:
         return DEFAULT_CATEGORIES

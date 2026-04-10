@@ -36,6 +36,15 @@ def test_revolut_reader_reads_several_revolut_entries(reader):
     assert len(result) == 10
 
 
+def test_revolut_reader_reads_utf8_encoded_entry(reader):
+    current_path = pathlib.Path(__file__).parent.resolve()
+    path_to_file = f"{current_path}/files/test_revolut_reader_utf8_entry.csv"
+    result = reader.read_from_file(path_to_file=path_to_file)
+
+    assert len(result) == 1
+    assert result[0].description == "Cöffee at café"
+
+
 def test_revolut_reader_does_nothing_on_empty_file(reader):
     current_path = pathlib.Path(__file__).parent.resolve()
     path_to_file = f"{current_path}/files/test_revolut_reader_no_entries.csv"
