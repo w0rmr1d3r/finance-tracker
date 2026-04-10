@@ -259,7 +259,7 @@ def assign_category(req: AssignCategoryRequest):
     current_cats["CATEGORIES"] = cats_dict
 
     categories_path = pathlib.Path(__file__).parent.resolve() / ".." / "load" / "categories" / "categories.json"
-    with open(categories_path, "w", encoding="ASCII") as f:
+    with open(categories_path, "w", encoding=ENCODING) as f:
         json.dump(current_cats, f, ensure_ascii=True, indent=4)
 
     CategorySearcher.search_category.cache_clear()
@@ -297,7 +297,7 @@ def create_category(req: CreateCategoryRequest):
         current_cats["POSITIVE_CATEGORIES"] = pos
 
     categories_path = pathlib.Path(__file__).parent.resolve() / ".." / "load" / "categories" / "categories.json"
-    with open(categories_path, "w", encoding="ASCII") as f:
+    with open(categories_path, "w", encoding=ENCODING) as f:
         json.dump(current_cats, f, ensure_ascii=True, indent=4)
 
     return JSONResponse(
@@ -322,7 +322,7 @@ def delete_category(name: str):
         pos.remove(name)
     current_cats["POSITIVE_CATEGORIES"] = pos
     categories_path = pathlib.Path(__file__).parent.resolve() / ".." / "load" / "categories" / "categories.json"
-    with open(categories_path, "w", encoding="ASCII") as f:
+    with open(categories_path, "w", encoding=ENCODING) as f:
         json.dump(current_cats, f, ensure_ascii=True, indent=4)
 
     CategorySearcher.search_category.cache_clear()
