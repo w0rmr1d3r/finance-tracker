@@ -1,5 +1,6 @@
 import csv
 
+from finance_tracker.constants import ENCODING
 from finance_tracker.entries.entry import Entry
 from finance_tracker.money.currency_codes import CurrencyCodes
 from finance_tracker.money.money import DEFAULT_MONEY, Money
@@ -15,14 +16,21 @@ class EntryReader(BaseReader):
 
     def read_from_file(self, path_to_file: str) -> list:
         """
-        Reads entries from the given file
+        Reads entries from the given file.
+        Supports both semicolon-delimited and comma-delimited formats,
+        detected automatically from the header.
 
         :param path_to_file: Path to file with entries
         :return: List of Entry
         """
         entries = []
-        with open(path_to_file, "r", encoding="UTF-8") as file:
-            csvreader = csv.reader(file, dialect="excel", delimiter=";")
+        with open(path_to_file, "r", encoding=ENCODING) as file:
+            first_line = file.readline()
+            file.seek(0)
+
+            delimiter = ";" if ";" in first_line else ","
+
+            csvreader = csv.reader(file, dialect="excel", delimiter=delimiter)
             for _ in range(self._HEADERS_TO_IGNORE):
                 next(csvreader)
 
