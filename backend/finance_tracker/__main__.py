@@ -12,13 +12,13 @@ from pydantic import BaseModel
 
 from finance_tracker.aggregators.aggregator_by_month import AggregatorByMonth
 from finance_tracker.categories.categories import (
-    DEFAULT_CATEGORY,
     all_categories,
     negative_categories,
     positive_categories,
 )
 from finance_tracker.categories.categorizer import Categorizer
 from finance_tracker.categories.category_searcher import CategorySearcher
+from finance_tracker.constants import DEFAULT_CATEGORY, ENCODING
 from finance_tracker.entries.entry import Entry
 from finance_tracker.readers.entry_reader import EntryReader
 from finance_tracker.readers.revolut_reader import RevolutReader
@@ -145,16 +145,16 @@ def _save_entries():
     saved_files_path = pathlib.Path(__file__).parent.resolve() / ".." / "saved_files"
     saved_files_path.mkdir(parents=True, exist_ok=True)
 
-    with open(saved_files_path / "positive.json", "w", encoding="utf-8") as f:
+    with open(saved_files_path / "positive.json", "w", encoding=ENCODING) as f:
         json.dump(positive_aggregated, f, ensure_ascii=False, indent=4, cls=FinanceTrackerEncoder)
 
-    with open(saved_files_path / "negative.json", "w", encoding="utf-8") as f:
+    with open(saved_files_path / "negative.json", "w", encoding=ENCODING) as f:
         json.dump(negative_aggregated, f, ensure_ascii=False, indent=4, cls=FinanceTrackerEncoder)
 
-    with open(saved_files_path / "uncategorized.json", "w", encoding="utf-8") as f:
+    with open(saved_files_path / "uncategorized.json", "w", encoding=ENCODING) as f:
         json.dump(uncategorized, f, ensure_ascii=False, indent=4, cls=FinanceTrackerEncoder)
 
-    with open(saved_files_path / "all_entries.json", "w", encoding="utf-8") as f:
+    with open(saved_files_path / "all_entries.json", "w", encoding=ENCODING) as f:
         json.dump(all_entries, f, ensure_ascii=False, indent=4, cls=FinanceTrackerEncoder)
 
 
@@ -192,13 +192,13 @@ def data():
     if not positive_path.exists() or not negative_path.exists() or not uncategorized_path.exists():
         raise HTTPException(status_code=503, detail="Data not yet available")
 
-    with open(positive_path, "r", encoding="utf-8") as f:
+    with open(positive_path, "r", encoding=ENCODING) as f:
         positive = json.load(f)
 
-    with open(negative_path, "r", encoding="utf-8") as f:
+    with open(negative_path, "r", encoding=ENCODING) as f:
         negative = json.load(f)
 
-    with open(uncategorized_path, "r", encoding="utf-8") as f:
+    with open(uncategorized_path, "r", encoding=ENCODING) as f:
         uncategorized = json.load(f)
 
     return JSONResponse({"positive": positive, "negative": negative, "uncategorized": uncategorized})
@@ -211,7 +211,7 @@ def get_entries():
     path = saved_files_path / "all_entries.json"
     if not path.exists():
         raise HTTPException(status_code=503, detail="Entries not yet available")
-    with open(path, "r", encoding="utf-8") as f:
+    with open(path, "r", encoding=ENCODING) as f:
         return JSONResponse(json.load(f))
 
 
@@ -266,11 +266,11 @@ def assign_category(req: AssignCategoryRequest):
     _save_entries()
 
     saved_files_path = pathlib.Path(__file__).parent.resolve() / ".." / "saved_files"
-    with open(saved_files_path / "positive.json", "r", encoding="utf-8") as f:
+    with open(saved_files_path / "positive.json", "r", encoding=ENCODING) as f:
         positive = json.load(f)
-    with open(saved_files_path / "negative.json", "r", encoding="utf-8") as f:
+    with open(saved_files_path / "negative.json", "r", encoding=ENCODING) as f:
         negative = json.load(f)
-    with open(saved_files_path / "uncategorized.json", "r", encoding="utf-8") as f:
+    with open(saved_files_path / "uncategorized.json", "r", encoding=ENCODING) as f:
         uncategorized = json.load(f)
 
     return JSONResponse({"positive": positive, "negative": negative, "uncategorized": uncategorized})

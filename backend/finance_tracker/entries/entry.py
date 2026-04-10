@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from datetime import date, datetime
 
+from finance_tracker.constants import DATE_FORMAT
 from finance_tracker.entries.revolut_entry import RevolutEntry
 from finance_tracker.entries.santander_entry import SantanderEntry
 from finance_tracker.money.money import Money
@@ -23,7 +24,7 @@ class Entry:
 
         :return: Date object given an entry_date
         """
-        return datetime.strptime(self.entry_date, "%d/%m/%Y").date()
+        return datetime.strptime(self.entry_date, DATE_FORMAT).date()
 
     def date_of_action_as_time(self) -> date:
         """
@@ -31,7 +32,7 @@ class Entry:
 
         :return: Date object given a date_of_action
         """
-        return datetime.strptime(self.date_of_action, "%d/%m/%Y").date()
+        return datetime.strptime(self.date_of_action, DATE_FORMAT).date()
 
     def month_from_date(self) -> int:
         """
