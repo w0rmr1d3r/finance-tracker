@@ -36,7 +36,7 @@ def read_entries_from_files(entries):
     logger.info("Searching for Default entries files...")
     current_path = pathlib.Path(__file__).parent.resolve()
     entries_files = os.listdir(f"{current_path}/../load/entries_files/")
-    logger.info(f"Found: {len(entries_files) - 1} files")
+    logger.info(f"Found: {sum(1 for f in entries_files if f.endswith('.csv'))} files")
     reader = EntryReader()
     logger.info("Reading entries from files...")
     for file in entries_files:
@@ -57,7 +57,7 @@ def read_revolut_entries_from_files(revolut_entries):
     logger.info("Searching for Revolut files...")
     current_path = pathlib.Path(__file__).parent.resolve()
     revolut_entries_files = os.listdir(f"{current_path}/../load/entries_files/revolut/")
-    logger.info(f"Found: {len(revolut_entries_files) - 1} Revolut files")
+    logger.info(f"Found: {sum(1 for f in revolut_entries_files if f.endswith('.csv'))} Revolut files")
     revolut_reader = RevolutReader()
     logger.info("Reading entries from Revolut files...")
     for file in revolut_entries_files:
@@ -78,7 +78,7 @@ def read_santander_entries_from_files(santander_entries):
     logger.info("Searching for Santander files...")
     current_path = pathlib.Path(__file__).parent.resolve()
     santander_entries_files = os.listdir(f"{current_path}/../load/entries_files/santander/")
-    logger.info(f"Found: {len(santander_entries_files) - 1} Santander files")
+    logger.info(f"Found: {sum(1 for f in santander_entries_files if f.endswith('.csv'))} Santander files")
     santander_reader = SantanderReader()
     logger.info("Reading entries from Santander files...")
     for file in santander_entries_files:
