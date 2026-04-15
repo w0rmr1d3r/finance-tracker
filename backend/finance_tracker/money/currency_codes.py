@@ -12,6 +12,7 @@ class CurrencyCodes(str, Enum):
     """
 
     EUR: str = "EUR"
+    USD: str = "USD"
 
     def __str__(self):
         return self.value

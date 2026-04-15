@@ -23,6 +23,7 @@ from finance_tracker.entries.entry import Entry
 from finance_tracker.readers.entry_reader import EntryReader
 from finance_tracker.readers.revolut_reader import RevolutReader
 from finance_tracker.readers.santander_reader import SantanderReader
+from finance_tracker.readers.trading212_reader import Trading212Reader
 
 logger = logging.getLogger(__name__)
 
@@ -90,6 +91,27 @@ def read_santander_entries_from_files(santander_entries):
             )
 
 
+def read_trading212_entries_from_files(trading212_entries):
+    """
+    Read Trading212 CSV entries from the trading212 sub-directory into trading212_entries.
+
+    :param trading212_entries: List to extend with the read Trading212Entry objects
+    """
+    logger.info("Searching for Trading212 files...")
+    current_path = pathlib.Path(__file__).parent.resolve()
+    trading212_entries_files = os.listdir(f"{current_path}/../load/entries_files/trading212/")
+    logger.info(f"Found: {len(trading212_entries_files) - 1} Trading212 files")
+    trading212_reader = Trading212Reader()
+    logger.info("Reading entries from Trading212 files...")
+    for file in trading212_entries_files:
+        if file.endswith(".csv"):
+            trading212_entries.extend(
+                trading212_reader.read_from_file(
+                    path_to_file=f"{current_path}/../load/entries_files/trading212/{file}",
+                )
+            )
+
+
 class FinanceTrackerEncoder(JSONEncoder):
     """JSON encoder that serialises objects via their __dict__."""
 
@@ -121,6 +143,11 @@ def _process_entries():
     read_santander_entries_from_files(santander_entries=santander_entries)
     for san_entry in santander_entries:
         entries.append(Entry.from_santander_entry(san_entry))
+
+    trading212_entries = []
+    read_trading212_entries_from_files(trading212_entries=trading212_entries)
+    for t212_entry in trading212_entries:
+        entries.append(Entry.from_trading212_entry(t212_entry))
 
     logger.info("Setting categories for entries...")
     categorizer.set_category_for_entries(uncategorized_entries=entries)
