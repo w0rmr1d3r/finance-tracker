@@ -17,7 +17,7 @@ dependencies = [
 dev = [
     "faker>=15.0.0",
     "httpx>=0.28.1",
-    "pytest>=7.0.0",
+    "pytest>=9.0.3",
     "ruff==0.15.8", # still in 0.x introducing breaking changes
 ]
 
