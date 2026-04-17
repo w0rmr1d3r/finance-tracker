@@ -46,6 +46,18 @@ def test_entry_from_trading212_card_debit_uses_merchant_as_title(trading212_entr
     assert not entry.other_data
 
 
+def test_entry_from_trading212_card_debit_without_merchant_falls_back_to_action():
+    no_merchant_entry = Trading212Entry(
+        action="Card debit",
+        time="2024-03-15 10:30:00",
+        total=-25.50,
+        currency_total="EUR",
+        merchant_name="",
+    )
+    entry = Entry.from_trading212_entry(no_merchant_entry)
+    assert entry.title == "Card debit"
+
+
 def test_entry_from_trading212_non_card_debit_uses_action_as_title():
     non_card_entry = Trading212Entry(
         action="Dividend",
