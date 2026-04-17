@@ -11,6 +11,7 @@ class Trading212Reader(BaseReader):
     """
 
     _HEADERS_TO_IGNORE = 1
+    _MERCHANT_COL = 19
 
     def read_from_file(self, path_to_file: str) -> list:
         """
@@ -42,7 +43,7 @@ class Trading212Reader(BaseReader):
                         time=row[1],
                         total=float(total_str),
                         currency_total=row[14],
-                        merchant_name=row[19] if len(row) > 19 else "",
+                        merchant_name=row[self._MERCHANT_COL] if len(row) > self._MERCHANT_COL else "",
                     )
                 )
 
