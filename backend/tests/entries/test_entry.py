@@ -43,7 +43,7 @@ def test_entry_from_trading212_card_debit_uses_merchant_as_title(trading212_entr
     assert entry.date_of_action == "15/03/2024"
     assert entry.quantity == Money(amount=-25.50, currency_code=CurrencyCodes.EUR)
     assert entry.balance == Money(amount=0.0, currency_code=CurrencyCodes.EUR)
-    assert entry.other_data == ""
+    assert not entry.other_data
 
 
 def test_entry_from_trading212_non_card_debit_uses_action_as_title():

@@ -93,11 +93,7 @@ class Entry:
         :param trading212_entry: Trading212Entry to obtain data from
         :return: Entry from a Trading212Entry
         """
-        title = (
-            trading212_entry.merchant_name
-            if trading212_entry.action == "Card debit"
-            else trading212_entry.action
-        )
+        title = trading212_entry.merchant_name if trading212_entry.action == "Card debit" else trading212_entry.action
         return cls(
             entry_date=trading212_entry.time_for_entry(),
             date_of_action=trading212_entry.time_for_entry(),

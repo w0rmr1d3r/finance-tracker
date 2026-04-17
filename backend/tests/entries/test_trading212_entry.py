@@ -1,7 +1,5 @@
 from datetime import date
 
-import pytest
-
 from finance_tracker.entries.trading212_entry import Trading212Entry
 from finance_tracker.money.currency_codes import CurrencyCodes
 from finance_tracker.money.money import Money

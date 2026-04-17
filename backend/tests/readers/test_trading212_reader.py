@@ -32,7 +32,7 @@ def test_trading212_reader_reads_entry_without_merchant(reader):
     assert result[0].action == "Market buy"
     assert result[0].total == 100.00
     assert result[0].currency_total == "EUR"
-    assert result[0].merchant_name == ""
+    assert not result[0].merchant_name
 
 
 def test_trading212_reader_normalizes_dividend_action(reader):
