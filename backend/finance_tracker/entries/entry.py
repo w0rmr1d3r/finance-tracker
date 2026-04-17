@@ -4,6 +4,7 @@ from datetime import date, datetime
 from finance_tracker.constants import DATE_FORMAT
 from finance_tracker.entries.revolut_entry import RevolutEntry
 from finance_tracker.entries.santander_entry import SantanderEntry
+from finance_tracker.entries.trading212_entry import Trading212Entry
 from finance_tracker.money.money import Money
 
 
@@ -82,4 +83,28 @@ class Entry:
             other_data="",
             quantity=revolut_entry.quantity(),
             balance=revolut_entry.balance_as_money(),
+        )
+
+    @classmethod
+    def from_trading212_entry(cls, trading212_entry: Trading212Entry):
+        """
+        Returns an Entry from a Trading212Entry.
+
+        :param trading212_entry: Trading212Entry to obtain data from
+        :return: Entry from a Trading212Entry
+        """
+        title = (
+            (trading212_entry.merchant_name or trading212_entry.action)
+            if trading212_entry.action == "Card debit"
+            else trading212_entry.action
+        )
+        quantity = trading212_entry.quantity()
+        entry_time = trading212_entry.time_for_entry()
+        return cls(
+            entry_date=entry_time,
+            date_of_action=entry_time,
+            title=title,
+            other_data="",
+            quantity=quantity,
+            balance=Money(amount=0.0, currency_code=quantity.currency_code),
         )

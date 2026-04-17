@@ -63,7 +63,7 @@ preview = true
 "*test*.py" = [
     "D", # ignore all docstring lints in tests
     "PLR2004", # ignore magic numbers rule in tests
-    "RUF069"
+    "RUF069", # float-equality-comparison
 ]
 
 [tool.ruff.format]

@@ -4,6 +4,7 @@ set -e
 mkdir -p backend/load/categories
 mkdir -p backend/load/entries_files/revolut
 mkdir -p backend/load/entries_files/santander
+mkdir -p backend/load/entries_files/trading212
 mkdir -p backend/saved_files
 
 if [ ! -f backend/load/categories/categories.json ]; then

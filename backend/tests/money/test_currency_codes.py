@@ -8,3 +8,14 @@ def test_currency_code_is_json_serializable():
     currency_code_dumped = json.dumps(currency_code)
     currency_code_loaded = json.loads(currency_code_dumped)
     assert currency_code_loaded == currency_code
+
+
+def test_currency_code_usd_exists():
+    assert CurrencyCodes.USD == "USD"
+
+
+def test_currency_code_usd_is_json_serializable():
+    currency_code = CurrencyCodes.USD
+    currency_code_dumped = json.dumps(currency_code)
+    currency_code_loaded = json.loads(currency_code_dumped)
+    assert currency_code_loaded == currency_code

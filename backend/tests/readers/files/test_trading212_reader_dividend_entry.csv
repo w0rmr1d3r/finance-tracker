@@ -1,0 +1,2 @@
+Action,Time,ISIN,Ticker,Name,Shares,Price,Currency(Price),ExchangeRate,Result,Currency(Result),Sub-total,Currency(Sub-total),Total,Currency(Total),FromAccount,ToAccount,ID,Notes
+Dividend (AAPL Jan 2024),2024-01-15 09:00:00,,,,,,,,,,,,1.50,USD,,,,
