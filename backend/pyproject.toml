@@ -64,7 +64,6 @@ preview = true
     "D", # ignore all docstring lints in tests
     "PLR2004", # ignore magic numbers rule in tests
     "RUF069", # float-equality-comparison
-    "PLR2004", # Magic value used in comparison
 ]
 
 [tool.ruff.format]
