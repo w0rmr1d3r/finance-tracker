@@ -99,9 +99,10 @@ class Entry:
             else trading212_entry.action
         )
         quantity = trading212_entry.quantity()
+        entry_time = trading212_entry.time_for_entry()
         return cls(
-            entry_date=trading212_entry.time_for_entry(),
-            date_of_action=trading212_entry.time_for_entry(),
+            entry_date=entry_time,
+            date_of_action=entry_time,
             title=title,
             other_data="",
             quantity=quantity,
