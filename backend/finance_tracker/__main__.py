@@ -100,7 +100,7 @@ def read_trading212_entries_from_files(trading212_entries):
     logger.info("Searching for Trading212 files...")
     current_path = pathlib.Path(__file__).parent.resolve()
     trading212_entries_files = os.listdir(f"{current_path}/../load/entries_files/trading212/")
-    logger.info(f"Found: {len(trading212_entries_files) - 1} Trading212 files")
+    logger.info(f"Found: {sum(1 for f in trading212_entries_files if f.endswith('.csv'))} Trading212 files")
     trading212_reader = Trading212Reader()
     logger.info("Reading entries from Trading212 files...")
     for file in trading212_entries_files:

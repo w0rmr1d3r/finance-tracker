@@ -4,6 +4,7 @@ import pytest
 
 from finance_tracker.entries.entry import Entry
 from finance_tracker.entries.revolut_entry import RevolutEntry
+from finance_tracker.entries.trading212_entry import Trading212Entry
 from finance_tracker.money.money import Money
 
 
@@ -40,4 +41,15 @@ def revolut_entry() -> RevolutEntry:
         currency="EUR",
         state="COMPLETED",
         balance=100,
+    )
+
+
+@pytest.fixture
+def trading212_entry() -> Trading212Entry:
+    return Trading212Entry(
+        action="Card debit",
+        time="2024-03-15 10:30:00",
+        total=-25.50,
+        currency_total="EUR",
+        merchant_name="Coffee Shop",
     )

@@ -1,0 +1,11 @@
+Action,Time,ISIN,Ticker,Name,Shares,Price,Currency(Price),ExchangeRate,Result,Currency(Result),Sub-total,Currency(Sub-total),Total,Currency(Total),FromAccount,ToAccount,ID,Notes,Merchant
+Card debit,2024-03-15 10:30:00,,,,,,,,,,,,-25.50,EUR,,,,,Coffee Shop
+Card debit,2024-03-16 11:00:00,,,,,,,,,,,,-10.00,EUR,,,,,Supermarket
+Market buy,2024-03-17 09:00:00,,,,,,,,,,,,100.00,EUR,,,,
+Market sell,2024-03-18 14:00:00,,,,,,,,,,,,200.00,EUR,,,,
+Dividend (AAPL),2024-03-19 10:00:00,,,,,,,,,,,,1.50,USD,,,,
+Card debit,2024-03-20 12:00:00,,,,,,,,,,,,-5.00,EUR,,,,,Pharmacy
+Market buy,2024-03-21 09:00:00,,,,,,,,,,,,50.00,EUR,,,,
+Card debit,2024-03-22 18:00:00,,,,,,,,,,,,-30.00,EUR,,,,,Restaurant
+Market sell,2024-03-23 15:00:00,,,,,,,,,,,,75.00,EUR,,,,
+Card debit,2024-03-24 10:00:00,,,,,,,,,,,,-8.00,EUR,,,,,Bakery
