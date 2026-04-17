@@ -94,11 +94,12 @@ class Entry:
         :return: Entry from a Trading212Entry
         """
         title = trading212_entry.merchant_name if trading212_entry.action == "Card debit" else trading212_entry.action
+        quantity = trading212_entry.quantity()
         return cls(
             entry_date=trading212_entry.time_for_entry(),
             date_of_action=trading212_entry.time_for_entry(),
             title=title,
             other_data="",
-            quantity=trading212_entry.quantity(),
-            balance=Money(amount=0.0, currency_code=trading212_entry.quantity().currency_code),
+            quantity=quantity,
+            balance=Money(amount=0.0, currency_code=quantity.currency_code),
         )
