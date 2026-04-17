@@ -131,6 +131,7 @@ On startup the backend server automatically processes all entries and writes fou
 
 - Revolut
 - Santander
+- Trading212
 
 Any other bank can be supported by implementing a new reader or by formatting your export as the default CSV (see
 [Setting up the data](#setting-up-the-data)).
