@@ -7,4 +7,7 @@ test:
 build:
 	npm run build
 
-.PHONY: install test build
+lock:
+	npm install --package-lock-only
+
+.PHONY: install test build lock
