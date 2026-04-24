@@ -1,6 +1,9 @@
 install:
 	npm ci
 
+install-dev:
+	npm ci --include=dev
+
 test:
 	npm test
 
