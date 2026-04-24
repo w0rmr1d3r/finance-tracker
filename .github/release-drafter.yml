@@ -1,11 +1,11 @@
 name-template: '$RESOLVED_VERSION'
 tag-template: '$RESOLVED_VERSION'
 categories:
-  - title: 'New things'
+  - title: 'News'
     labels:
       - 'enhancement'
       - 'feature'
-  - title: 'Bug Fixes'
+  - title: 'Fixes'
     labels:
       - 'fix'
       - 'bug'
@@ -15,22 +15,21 @@ categories:
   - title: 'Maintenance'
     labels:
       - 'cleaning'
-  - title: 'Documentation'
+  - title: 'Docs'
     labels:
       - 'documentation'
       - 'docs'
-  - title: 'CI/CD'
+  - title: 'Development'
     labels:
       - 'ci'
       - 'cd'
-  - title: 'Frontend bumps'
+      - 'development'
+  - title: 'Service bumps'
     labels:
       - 'javascript'
-  - title: 'Backend bumps'
-    labels:
       - 'python'
       - 'python:uv'
-  - title: 'CI bumps'
+  - title: 'Pipeline bumps'
     labels:
       - 'github_actions'
 version-resolver:
