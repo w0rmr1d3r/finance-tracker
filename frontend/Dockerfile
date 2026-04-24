@@ -3,13 +3,15 @@ FROM node:20-alpine AS build
 
 WORKDIR /app
 
-COPY package-lock.json package.json ./
+RUN apk add --no-cache make
 
-RUN npm ci
+COPY package-lock.json package.json Makefile ./
+
+RUN make install
 
 COPY . .
 
-RUN npm run build
+RUN make build
 
 # Stage 2: Serve
 FROM nginx:alpine

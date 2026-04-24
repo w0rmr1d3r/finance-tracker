@@ -1,6 +1,8 @@
 install:
 	npm ci
 
+install-dev: install
+
 test:
 	npm test
 
@@ -10,4 +12,4 @@ build:
 lock:
 	npm install --package-lock-only
 
-.PHONY: install test build lock
+.PHONY: install install-dev test build lock
