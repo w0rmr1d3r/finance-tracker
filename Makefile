@@ -15,6 +15,7 @@ test:
 
 lock:
 	$(MAKE) -C backend lock
+	$(MAKE) -C frontend lock
 
 lock-upgrade:
 	$(MAKE) -C backend lock-upgrade
