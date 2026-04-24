@@ -4,8 +4,10 @@ COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
 WORKDIR /app
 
-COPY pyproject.toml uv.lock ./
-RUN uv sync --no-dev --frozen
+RUN apt-get update && apt-get install -y --no-install-recommends make && rm -rf /var/lib/apt/lists/*
+
+COPY pyproject.toml uv.lock Makefile ./
+RUN make install
 
 COPY finance_tracker/ finance_tracker/
 COPY entrypoint.py .
