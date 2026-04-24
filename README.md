@@ -89,7 +89,7 @@ On startup the backend server automatically processes all entries and writes fou
 #### Frontend
 
 1. Install [Node.js](https://nodejs.org/) 20+
-2. Run `make frontend-install`
+2. Run `make install`
 3. Run `cd frontend && npm run dev` — served at `http://localhost:5173`
 
 ## Setting up the data
@@ -147,7 +147,6 @@ Any other bank can be supported by implementing a new reader or by formatting yo
 | `make test`             | Runs tests                               |
 | `make lint`             | Lint backend code                        |
 | `make format`           | Format backend code                      |
-| `make run`              | Run backend locally                      |
 | `make lock`             | Locks dependencies                       |
 | `make lock-upgrade`     | Upgrade and re-lock backend dependencies |
 | `make frontend-build`   | Build frontend for production            |
@@ -157,11 +156,8 @@ Any other bank can be supported by implementing a new reader or by formatting yo
 ### Running tests
 
 ```bash
-# Backend
+# Backend & Frontend
 make test
-
-# Frontend
-make frontend-test
 ```
 
 ## Contributing
