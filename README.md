@@ -142,16 +142,14 @@ Any other bank can be supported by implementing a new reader or by formatting yo
 
 | Target                  | Description                              |
 |-------------------------|------------------------------------------|
-| `make install`          | Install backend production dependencies  |
-| `make install-dev`      | Install backend development dependencies |
-| `make test`             | Run backend tests                        |
+| `make install`          | Installs production dependencies         |
+| `make install-dev`      | Installs development dependencies        |
+| `make test`             | Runs tests                               |
 | `make lint`             | Lint backend code                        |
 | `make format`           | Format backend code                      |
 | `make run`              | Run backend locally                      |
-| `make lock`             | Lock backend dependencies                |
+| `make lock`             | Locks dependencies                       |
 | `make lock-upgrade`     | Upgrade and re-lock backend dependencies |
-| `make frontend-install` | Install frontend dependencies (`npm ci`) |
-| `make frontend-test`    | Run frontend tests (Vitest)              |
 | `make frontend-build`   | Build frontend for production            |
 | `make docker-build`     | Build Docker images                      |
 | `make docker-run`       | Start all services via Docker Compose    |
