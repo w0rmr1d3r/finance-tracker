@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Background card -->
+  <rect width="64" height="64" rx="12" fill="#0f172a"/>
+
+  <!-- Ascending bar chart -->
+  <rect x="8"  y="46" width="11" height="10" rx="2" fill="#a855f7" opacity="0.7"/>
+  <rect x="22" y="36" width="11" height="20" rx="2" fill="#a855f7" opacity="0.85"/>
+  <rect x="36" y="24" width="11" height="32" rx="2" fill="#a855f7" opacity="0.90"/>
+  <rect x="50" y="12" width="10" height="44" rx="2" fill="#a855f7"/>
+
+  <!-- Currency symbol -->
+  <text
+    x="41"
+    y="20"
+    font-family="sans-serif"
+    font-weight="bold"
+    font-size="13"
+    fill="#facc15"
+    text-anchor="middle"
+  >€</text>
+</svg>
