@@ -18,7 +18,7 @@ dev = [
     "faker>=15.0.0",
     "httpx>=0.28.1",
     "pytest>=9.0.3",
-    "ruff==0.15.8", # still in 0.x introducing breaking changes
+    "ruff==0.15.11", # still in 0.x introducing breaking changes
 ]
 
 [tool.uv]

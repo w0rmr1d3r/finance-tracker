@@ -186,7 +186,7 @@ def _save_entries():
 
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):  # noqa: RUF029
+async def lifespan(app: FastAPI):
     """Processes and saves entries on server startup."""
     logger.info("Starting up: processing and saving entries...")
     _save_entries()
