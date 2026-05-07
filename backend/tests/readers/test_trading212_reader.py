@@ -68,3 +68,27 @@ def test_trading212_reader_does_nothing_on_empty_file(reader):
     result = reader.read_from_file(path_to_file=path_to_file)
 
     assert len(result) == 0
+
+
+def test_trading212_reader_finds_merchant_when_at_col_17(reader):
+    current_path = pathlib.Path(__file__).parent.resolve()
+    path_to_file = f"{current_path}/files/test_trading212_reader_merchant_at_col_17.csv"
+    result = reader.read_from_file(path_to_file=path_to_file)
+
+    assert len(result) == 1
+    assert result[0].action == "Card debit"
+    assert result[0].total == -25.50
+    assert result[0].currency_total == "EUR"
+    assert result[0].merchant_name == "Coffee Shop"
+
+
+def test_trading212_reader_finds_merchant_when_at_col_19(reader):
+    current_path = pathlib.Path(__file__).parent.resolve()
+    path_to_file = f"{current_path}/files/test_trading212_reader_merchant_at_col_19.csv"
+    result = reader.read_from_file(path_to_file=path_to_file)
+
+    assert len(result) == 1
+    assert result[0].action == "Card debit"
+    assert result[0].total == -25.50
+    assert result[0].currency_total == "EUR"
+    assert result[0].merchant_name == "Coffee Shop"
