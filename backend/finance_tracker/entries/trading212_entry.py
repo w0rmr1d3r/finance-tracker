@@ -14,7 +14,7 @@ class Trading212Entry:
     time: str
     total: float
     currency_total: str
-    merchant_name: str
+    merchant_name: str  # To be deprecated in next major version, as it can be simplified and use action only.
 
     def quantity(self) -> Money:
         """

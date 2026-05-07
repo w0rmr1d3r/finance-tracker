@@ -10,8 +10,7 @@ class Trading212Reader(BaseReader):
     Reader for Trading212 full-export CSV files.
     """
 
-    _HEADERS_TO_IGNORE = 1
-    _MERCHANT_COL = 19
+    _MERCHANT_COL_NAME = "Merchant name"
 
     def read_from_file(self, path_to_file: str) -> list:
         """
@@ -23,8 +22,11 @@ class Trading212Reader(BaseReader):
         entries = []
         with open(path_to_file, "r", encoding=ENCODING) as file:
             csvreader = csv.reader(file, delimiter=",")
-            for _ in range(self._HEADERS_TO_IGNORE):
-                next(csvreader)
+            headers = next(csvreader)
+            merchant_col = next(
+                (i for i, h in enumerate(headers) if h.strip() == self._MERCHANT_COL_NAME),
+                None,
+            )
 
             for row in csvreader:
                 if not row:
@@ -43,7 +45,7 @@ class Trading212Reader(BaseReader):
                         time=row[1],
                         total=float(total_str),
                         currency_total=row[14],
-                        merchant_name=row[self._MERCHANT_COL] if len(row) > self._MERCHANT_COL else "",
+                        merchant_name=row[merchant_col] if merchant_col is not None and len(row) > merchant_col else "",
                     )
                 )
 
