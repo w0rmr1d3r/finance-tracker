@@ -48,7 +48,7 @@ def test_trading212_reader_normalizes_dividend_action(reader):
 
 def test_trading212_reader_uses_zero_for_empty_total(reader):
     current_path = pathlib.Path(__file__).parent.resolve()
-    path_to_file = f"{current_path}/files/test_trading212_reader_skips_empty_total.csv"
+    path_to_file = f"{current_path}/files/test_trading212_reader_uses_zero_for_empty_total.csv"
     result = reader.read_from_file(path_to_file=path_to_file)
 
     assert len(result) == 1

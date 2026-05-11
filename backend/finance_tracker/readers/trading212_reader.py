@@ -32,14 +32,14 @@ class Trading212Reader(BaseReader):
             )
 
             for row in csvreader:
-                # If there are no rows, we continue scanning, most probably skipping this file.
+                # If we find an empty row or a new line, we skip it.
                 if not row:
-                    logger.warning(f"No rows found in {path_to_file}")
+                    logger.warning("Empty row found, skipping.")
                     continue
 
                 total_str = row[13]
                 if not total_str:
-                    logger.warning("No total found for an entry, proceeding with dummy value")
+                    logger.warning(f"There's an entry with no total in {path_to_file}, assigning 0.0 as new total")
                     total_str = "0.0"
 
                 action = row[0]
