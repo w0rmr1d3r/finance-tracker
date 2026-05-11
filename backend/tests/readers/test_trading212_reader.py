@@ -55,10 +55,13 @@ def test_trading212_reader_uses_zero_for_empty_total(reader):
     assert result[0].total == 0.0
 
 
-@pytest.mark.parametrize("filename,expected_count", [
-    ("test_trading212_reader_several_entries.csv", 10),
-    ("test_trading212_reader_no_entries.csv", 0),
-])
+@pytest.mark.parametrize(
+    "filename,expected_count",
+    [
+        ("test_trading212_reader_several_entries.csv", 10),
+        ("test_trading212_reader_no_entries.csv", 0),
+    ],
+)
 def test_trading212_reader_result_count(reader, filename, expected_count):
     current_path = pathlib.Path(__file__).parent.resolve()
     path_to_file = f"{current_path}/files/{filename}"
