@@ -39,7 +39,10 @@ class Trading212Reader(BaseReader):
 
                 total_str = row[13]
                 if not total_str:
-                    logger.warning(f"There's an entry with no total in {path_to_file}, assigning 0.0 as new total")
+                    logger.warning(
+                        "There's an entry with no total in %s, assigning 0.0 as new total",
+                        path_to_file,
+                    )
                     total_str = "0.0"
 
                 action = row[0]
