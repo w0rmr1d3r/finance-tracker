@@ -46,12 +46,13 @@ def test_trading212_reader_normalizes_dividend_action(reader):
     assert result[0].currency_total == "USD"
 
 
-def test_trading212_reader_skips_rows_without_total(reader):
+def test_trading212_reader_uses_zero_for_empty_total(reader):
     current_path = pathlib.Path(__file__).parent.resolve()
     path_to_file = f"{current_path}/files/test_trading212_reader_skips_empty_total.csv"
     result = reader.read_from_file(path_to_file=path_to_file)
 
-    assert len(result) == 0
+    assert len(result) == 1
+    assert result[0].total == 0.0
 
 
 def test_trading212_reader_reads_several_entries(reader):

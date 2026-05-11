@@ -1,8 +1,11 @@
 import csv
+import logging
 
 from finance_tracker.constants import ENCODING
 from finance_tracker.entries.trading212_entry import Trading212Entry
 from finance_tracker.readers.base_reader import BaseReader
+
+logger = logging.getLogger(__name__)
 
 
 class Trading212Reader(BaseReader):
@@ -29,11 +32,15 @@ class Trading212Reader(BaseReader):
             )
 
             for row in csvreader:
+                # If there are no rows, we continue scanning, most probably skipping this file.
                 if not row:
+                    logger.warning(f"No rows found in {path_to_file}")
                     continue
+
                 total_str = row[13]
                 if not total_str:
-                    continue
+                    logger.warning("No total found for an entry, proceeding with dummy value")
+                    total_str = "0.0"
 
                 action = row[0]
                 if action.startswith("Dividend"):
