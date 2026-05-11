@@ -25,20 +25,16 @@ def test_entry_reader_reads_an_entry(reader):
     assert result[0].title == "PAYCHECK"
 
 
-def test_entry_reader_reads_several_entries(reader):
+@pytest.mark.parametrize("filename,expected_count", [
+    ("test_entry_reader_several_entries.csv", 10),
+    ("test_entry_reader_no_entries.csv", 0),
+])
+def test_entry_reader_result_count(reader, filename, expected_count):
     current_path = pathlib.Path(__file__).parent.resolve()
-    path_to_file = f"{current_path}/files/test_entry_reader_several_entries.csv"
+    path_to_file = f"{current_path}/files/{filename}"
     result = reader.read_from_file(path_to_file=path_to_file)
 
-    assert len(result) == 10
-
-
-def test_entry_reader_does_nothing_on_empty_file(reader):
-    current_path = pathlib.Path(__file__).parent.resolve()
-    path_to_file = f"{current_path}/files/test_entry_reader_no_entries.csv"
-    result = reader.read_from_file(path_to_file=path_to_file)
-
-    assert len(result) == 0
+    assert len(result) == expected_count
 
 
 def test_entry_reader_reads_an_entry_new_format(reader):
