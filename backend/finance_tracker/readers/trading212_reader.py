@@ -49,11 +49,15 @@ class Trading212Reader(BaseReader):
                 if action.startswith("Dividend"):
                     action = "Dividend"
 
+                total = float(total_str)
+                if action == "Market buy":
+                    total = -abs(total)
+
                 entries.append(
                     Trading212Entry(
                         action=action,
                         time=row[1],
-                        total=float(total_str),
+                        total=total,
                         currency_total=row[14],
                         merchant_name=row[merchant_col] if merchant_col is not None and len(row) > merchant_col else "",
                     )
