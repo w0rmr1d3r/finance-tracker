@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM python:3.14-slim AS builder
+FROM python:3.14.5-slim AS builder
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 
@@ -11,7 +11,7 @@ COPY pyproject.toml uv.lock Makefile ./
 RUN make install
 
 # Stage 2: Runtime
-FROM python:3.14-slim
+FROM python:3.14.5-slim
 
 WORKDIR /app
 
