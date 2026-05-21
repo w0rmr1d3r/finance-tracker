@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: "monthly"
     cooldown:
-      default-days: 7
+      default-days: 30
     open-pull-requests-limit: 10
     assignees:
       - "w0rmr1d3r"
@@ -20,7 +20,7 @@ updates:
     schedule:
       interval: "monthly"
     cooldown:
-      default-days: 7
+      default-days: 30
     open-pull-requests-limit: 10
     assignees:
       - "w0rmr1d3r"
@@ -30,7 +30,7 @@ updates:
     schedule:
       interval: "monthly"
     cooldown:
-      default-days: 7
+      default-days: 30
     open-pull-requests-limit: 10
     assignees:
       - "w0rmr1d3r"
@@ -40,7 +40,7 @@ updates:
     schedule:
       interval: "monthly"
     cooldown:
-      default-days: 7
+      default-days: 30
     open-pull-requests-limit: 10
     assignees:
       - "w0rmr1d3r"
@@ -50,7 +50,7 @@ updates:
     schedule:
       interval: "monthly"
     cooldown:
-      default-days: 7
+      default-days: 30
     open-pull-requests-limit: 10
     assignees:
       - "w0rmr1d3r"

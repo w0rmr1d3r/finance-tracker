@@ -23,6 +23,7 @@ dev = [
 
 [tool.uv]
 package = false
+exclude-newer = "30 days"
 index = [
     { name = "pypi", url = "https://pypi.org/simple/", default = true },
 ]
