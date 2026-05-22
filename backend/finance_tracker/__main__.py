@@ -1,7 +1,5 @@
 import json
 import logging
-import os
-import pathlib
 from contextlib import asynccontextmanager
 from json import JSONEncoder
 
@@ -18,98 +16,31 @@ from finance_tracker.categories.categories import (
 )
 from finance_tracker.categories.categorizer import Categorizer
 from finance_tracker.categories.category_searcher import CategorySearcher
-from finance_tracker.constants import DEFAULT_CATEGORY, ENCODING
-from finance_tracker.entries.entry import Entry
-from finance_tracker.readers.entry_reader import EntryReader
-from finance_tracker.readers.revolut_reader import RevolutReader
-from finance_tracker.readers.santander_reader import SantanderReader
-from finance_tracker.readers.trading212_reader import Trading212Reader
+from finance_tracker.constants import CATEGORIES_FILE, CONFIG_DIR, DEFAULT_CATEGORY, ENCODING, LOAD_DATA_DIR
+from finance_tracker.readers.reader_dispatcher import read_into_entries
 
 logger = logging.getLogger(__name__)
 
 
-def read_entries_from_files(entries):
+def read_entries_from_load_data(entries):
     """
-    Read CSV entries in the generic/default format from the entries_files directory into entries.
+    Read every CSV file in LOAD_DATA_DIR, auto-detecting the bank format from the
+    header line, and append generic Entry objects to entries.
 
     :param entries: List to extend with the read Entry objects
     """
-    logger.info("Searching for Default entries files...")
-    current_path = pathlib.Path(__file__).parent.resolve()
-    entries_files = os.listdir(f"{current_path}/../load/entries_files/")
-    logger.info(f"Found: {sum(1 for f in entries_files if f.endswith('.csv'))} files")
-    reader = EntryReader()
-    logger.info("Reading entries from files...")
-    for file in entries_files:
-        if file.endswith(".csv"):
-            entries.extend(
-                reader.read_from_file(
-                    path_to_file=f"{current_path}/../load/entries_files/{file}",
-                )
-            )
+    if not LOAD_DATA_DIR.exists():
+        logger.warning("load_data directory not found at %s", LOAD_DATA_DIR)
+        return
 
+    csv_files = sorted(p for p in LOAD_DATA_DIR.iterdir() if p.is_file() and p.suffix.lower() == ".csv")
+    logger.info("Found %d CSV files in load_data/", len(csv_files))
 
-def read_revolut_entries_from_files(revolut_entries):
-    """
-    Read Revolut CSV entries from the revolut sub-directory into revolut_entries.
-
-    :param revolut_entries: List to extend with the read RevolutEntry objects
-    """
-    logger.info("Searching for Revolut files...")
-    current_path = pathlib.Path(__file__).parent.resolve()
-    revolut_entries_files = os.listdir(f"{current_path}/../load/entries_files/revolut/")
-    logger.info(f"Found: {sum(1 for f in revolut_entries_files if f.endswith('.csv'))} Revolut files")
-    revolut_reader = RevolutReader()
-    logger.info("Reading entries from Revolut files...")
-    for file in revolut_entries_files:
-        if file.endswith(".csv"):
-            revolut_entries.extend(
-                revolut_reader.read_from_file(
-                    path_to_file=f"{current_path}/../load/entries_files/revolut/{file}",
-                )
-            )
-
-
-def read_santander_entries_from_files(santander_entries):
-    """
-    Read Santander CSV entries from the santander sub-directory into santander_entries.
-
-    :param santander_entries: List to extend with the read SantanderEntry objects
-    """
-    logger.info("Searching for Santander files...")
-    current_path = pathlib.Path(__file__).parent.resolve()
-    santander_entries_files = os.listdir(f"{current_path}/../load/entries_files/santander/")
-    logger.info(f"Found: {sum(1 for f in santander_entries_files if f.endswith('.csv'))} Santander files")
-    santander_reader = SantanderReader()
-    logger.info("Reading entries from Santander files...")
-    for file in santander_entries_files:
-        if file.endswith(".csv"):
-            santander_entries.extend(
-                santander_reader.read_from_file(
-                    path_to_file=f"{current_path}/../load/entries_files/santander/{file}",
-                )
-            )
-
-
-def read_trading212_entries_from_files(trading212_entries):
-    """
-    Read Trading212 CSV entries from the trading212 sub-directory into trading212_entries.
-
-    :param trading212_entries: List to extend with the read Trading212Entry objects
-    """
-    logger.info("Searching for Trading212 files...")
-    current_path = pathlib.Path(__file__).parent.resolve()
-    trading212_entries_files = os.listdir(f"{current_path}/../load/entries_files/trading212/")
-    logger.info(f"Found: {sum(1 for f in trading212_entries_files if f.endswith('.csv'))} Trading212 files")
-    trading212_reader = Trading212Reader()
-    logger.info("Reading entries from Trading212 files...")
-    for file in trading212_entries_files:
-        if file.endswith(".csv"):
-            trading212_entries.extend(
-                trading212_reader.read_from_file(
-                    path_to_file=f"{current_path}/../load/entries_files/trading212/{file}",
-                )
-            )
+    for path in csv_files:
+        try:
+            read_into_entries(str(path), entries)
+        except Exception:
+            logger.exception("Failed to read %s", path)
 
 
 class FinanceTrackerEncoder(JSONEncoder):
@@ -131,23 +62,7 @@ def _process_entries():
     month_aggregator = AggregatorByMonth()
 
     entries = []
-    read_entries_from_files(entries=entries)
-
-    revolut_entries = []
-    read_revolut_entries_from_files(revolut_entries=revolut_entries)
-
-    for rev_entry in revolut_entries:
-        entries.append(Entry.from_revolut_entry(rev_entry))
-
-    santander_entries = []
-    read_santander_entries_from_files(santander_entries=santander_entries)
-    for san_entry in santander_entries:
-        entries.append(Entry.from_santander_entry(san_entry))
-
-    trading212_entries = []
-    read_trading212_entries_from_files(trading212_entries=trading212_entries)
-    for t212_entry in trading212_entries:
-        entries.append(Entry.from_trading212_entry(t212_entry))
+    read_entries_from_load_data(entries=entries)
 
     logger.info("Setting categories for entries...")
     categorizer.set_category_for_entries(uncategorized_entries=entries)
@@ -167,21 +82,20 @@ def _process_entries():
 
 
 def _save_entries():
-    """Processes entries and writes results to saved_files/."""
+    """Processes entries and writes results to CONFIG_DIR."""
     positive_aggregated, negative_aggregated, uncategorized, all_entries = _process_entries()
-    saved_files_path = pathlib.Path(__file__).parent.resolve() / ".." / "saved_files"
-    saved_files_path.mkdir(parents=True, exist_ok=True)
+    CONFIG_DIR.mkdir(parents=True, exist_ok=True)
 
-    with open(saved_files_path / "positive.json", "w", encoding=ENCODING) as f:
+    with open(CONFIG_DIR / "positive.json", "w", encoding=ENCODING) as f:
         json.dump(positive_aggregated, f, ensure_ascii=False, indent=4, cls=FinanceTrackerEncoder)
 
-    with open(saved_files_path / "negative.json", "w", encoding=ENCODING) as f:
+    with open(CONFIG_DIR / "negative.json", "w", encoding=ENCODING) as f:
         json.dump(negative_aggregated, f, ensure_ascii=False, indent=4, cls=FinanceTrackerEncoder)
 
-    with open(saved_files_path / "uncategorized.json", "w", encoding=ENCODING) as f:
+    with open(CONFIG_DIR / "uncategorized.json", "w", encoding=ENCODING) as f:
         json.dump(uncategorized, f, ensure_ascii=False, indent=4, cls=FinanceTrackerEncoder)
 
-    with open(saved_files_path / "all_entries.json", "w", encoding=ENCODING) as f:
+    with open(CONFIG_DIR / "all_entries.json", "w", encoding=ENCODING) as f:
         json.dump(all_entries, f, ensure_ascii=False, indent=4, cls=FinanceTrackerEncoder)
 
 
@@ -211,10 +125,9 @@ app.add_middleware(
 @app.get("/data")
 def data():
     """Reads and returns the saved aggregated results."""
-    saved_files_path = pathlib.Path(__file__).parent.resolve() / ".." / "saved_files"
-    positive_path = saved_files_path / "positive.json"
-    negative_path = saved_files_path / "negative.json"
-    uncategorized_path = saved_files_path / "uncategorized.json"
+    positive_path = CONFIG_DIR / "positive.json"
+    negative_path = CONFIG_DIR / "negative.json"
+    uncategorized_path = CONFIG_DIR / "uncategorized.json"
 
     if not positive_path.exists() or not negative_path.exists() or not uncategorized_path.exists():
         raise HTTPException(status_code=503, detail="Data not yet available")
@@ -234,8 +147,7 @@ def data():
 @app.get("/entries")
 def get_entries():
     """Reads and returns all individual entries."""
-    saved_files_path = pathlib.Path(__file__).parent.resolve() / ".." / "saved_files"
-    path = saved_files_path / "all_entries.json"
+    path = CONFIG_DIR / "all_entries.json"
     if not path.exists():
         raise HTTPException(status_code=503, detail="Entries not yet available")
     with open(path, "r", encoding=ENCODING) as f:
@@ -285,19 +197,16 @@ def assign_category(req: AssignCategoryRequest):
 
     current_cats["CATEGORIES"] = cats_dict
 
-    categories_path = pathlib.Path(__file__).parent.resolve() / ".." / "load" / "categories" / "categories.json"
-    with open(categories_path, "w", encoding=ENCODING) as f:
+    with open(CATEGORIES_FILE, "w", encoding=ENCODING) as f:
         json.dump(current_cats, f, ensure_ascii=True, indent=4)
 
-    CategorySearcher.search_category.cache_clear()
     _save_entries()
 
-    saved_files_path = pathlib.Path(__file__).parent.resolve() / ".." / "saved_files"
-    with open(saved_files_path / "positive.json", "r", encoding=ENCODING) as f:
+    with open(CONFIG_DIR / "positive.json", "r", encoding=ENCODING) as f:
         positive = json.load(f)
-    with open(saved_files_path / "negative.json", "r", encoding=ENCODING) as f:
+    with open(CONFIG_DIR / "negative.json", "r", encoding=ENCODING) as f:
         negative = json.load(f)
-    with open(saved_files_path / "uncategorized.json", "r", encoding=ENCODING) as f:
+    with open(CONFIG_DIR / "uncategorized.json", "r", encoding=ENCODING) as f:
         uncategorized = json.load(f)
 
     return JSONResponse({"positive": positive, "negative": negative, "uncategorized": uncategorized})
@@ -323,8 +232,7 @@ def create_category(req: CreateCategoryRequest):
             pos.append(name)
         current_cats["POSITIVE_CATEGORIES"] = pos
 
-    categories_path = pathlib.Path(__file__).parent.resolve() / ".." / "load" / "categories" / "categories.json"
-    with open(categories_path, "w", encoding=ENCODING) as f:
+    with open(CATEGORIES_FILE, "w", encoding=ENCODING) as f:
         json.dump(current_cats, f, ensure_ascii=True, indent=4)
 
     return JSONResponse(
@@ -348,11 +256,9 @@ def delete_category(name: str):
     if name in pos:
         pos.remove(name)
     current_cats["POSITIVE_CATEGORIES"] = pos
-    categories_path = pathlib.Path(__file__).parent.resolve() / ".." / "load" / "categories" / "categories.json"
-    with open(categories_path, "w", encoding=ENCODING) as f:
+    with open(CATEGORIES_FILE, "w", encoding=ENCODING) as f:
         json.dump(current_cats, f, ensure_ascii=True, indent=4)
 
-    CategorySearcher.search_category.cache_clear()
     _save_entries()
 
     return JSONResponse(

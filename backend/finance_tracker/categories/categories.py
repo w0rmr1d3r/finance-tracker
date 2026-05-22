@@ -1,8 +1,7 @@
 import json
-import pathlib
 from typing import Set
 
-from finance_tracker.constants import DEFAULT_CATEGORIES, DEFAULT_CATEGORY, ENCODING
+from finance_tracker.constants import CATEGORIES_FILE, DEFAULT_CATEGORIES, DEFAULT_CATEGORY, ENCODING
 
 
 def all_categories():
@@ -12,9 +11,8 @@ def all_categories():
 
     :return: Python dict retrieved from the categories file
     """
-    current_path = pathlib.Path(__file__).parent.resolve()
     try:
-        with open(f"{current_path}/../../load/categories/categories.json", "r", encoding=ENCODING) as file:
+        with open(CATEGORIES_FILE, "r", encoding=ENCODING) as file:
             return json.load(file)
     except FileNotFoundError:
         return DEFAULT_CATEGORIES

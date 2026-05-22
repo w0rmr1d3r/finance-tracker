@@ -11,6 +11,7 @@ format:
 
 lint:
 	$(MAKE) -C backend lint
+	$(MAKE) -C frontend lint
 
 test:
 	$(MAKE) -C backend test

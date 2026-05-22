@@ -1,5 +1,4 @@
 import logging
-from functools import lru_cache
 
 from finance_tracker.categories.categories import DEFAULT_CATEGORY, categories_items
 
@@ -10,7 +9,6 @@ class CategorySearcher:
     """Searches entry titles against known category keywords."""
 
     @staticmethod
-    @lru_cache
     def search_category(title: str) -> str:
         """
         Searches the title of an entry in the categories. Returns the name of the category the title is in and

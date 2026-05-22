@@ -9,7 +9,7 @@ log_config["loggers"]["finance_tracker"] = {"handlers": ["default"], "level": "I
 
 uvicorn.run(
     "finance_tracker.__main__:app",
-    host="0.0.0.0",
+    host="127.0.0.1",
     port=8000,
     log_level="info",
     log_config=log_config,

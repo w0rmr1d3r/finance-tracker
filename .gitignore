@@ -132,6 +132,8 @@ dmypy.json
 .idea
 
 # Project files and folders
-backend/load/**
-backend/saved_files/**
+config/**
+!config/.gitkeep
+load_data/**
+!load_data/.gitkeep
 frontend/node_modules/
