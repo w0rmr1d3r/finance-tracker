@@ -57,6 +57,18 @@ def test_santander_reader_reads_new_format_entry_with_quoted_concept(reader):
     assert result[0].balance == 1000.00
 
 
+def test_santander_reader_reads_new_format_entry_with_decimal_comma(reader):
+    current_path = pathlib.Path(__file__).parent.resolve()
+    path_to_file = f"{current_path}/files/test_santander_reader_decimal_comma_new_format.csv"
+    result = reader.read_from_file(path_to_file=path_to_file)
+
+    assert len(result) == 2
+    assert result[0].amount == -50.00
+    assert result[0].balance == 1000.00
+    assert result[1].amount == 1000.00
+    assert result[1].balance == 2000.00
+
+
 def test_santander_reader_does_nothing_on_empty_file(reader):
     current_path = pathlib.Path(__file__).parent.resolve()
     path_to_file = f"{current_path}/files/test_santander_reader_no_entries.csv"

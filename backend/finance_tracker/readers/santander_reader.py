@@ -48,6 +48,4 @@ class SantanderReader(BaseReader):
 
     @staticmethod
     def _parse_amount(value: str, is_old_format: bool = False) -> float:
-        if is_old_format:
-            return float(value.replace(".", "").replace(",", "."))
-        return float(value.replace(",", ""))
+        return float(value.replace(".", "").replace(",", "."))
