@@ -24,7 +24,7 @@ dev = [
 [tool.uv]
 package = false
 # Ignoring this exclude option, as it's not dynamic and needs to be re-sync everytime.
-# The 30d cooldonw window is established at the dependabot config instead.
+# The 30d cooldown window is established at the dependabot config instead.
 #exclude-newer = "30 days"
 index = [
     { name = "pypi", url = "https://pypi.org/simple/", default = true },
