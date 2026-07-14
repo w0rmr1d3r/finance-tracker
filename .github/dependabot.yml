@@ -5,7 +5,7 @@
 
 version: 2
 updates:
-  - package-ecosystem: "pip"
+  - package-ecosystem: "uv"
     directory: "/backend"
     schedule:
       interval: "monthly"
@@ -26,17 +26,7 @@ updates:
       - "w0rmr1d3r"
 
   - package-ecosystem: "docker"
-    directory: "/backend"
-    schedule:
-      interval: "monthly"
-    cooldown:
-      default-days: 30
-    open-pull-requests-limit: 10
-    assignees:
-      - "w0rmr1d3r"
-
-  - package-ecosystem: "docker"
-    directory: "/frontend"
+    directory: "/"
     schedule:
       interval: "monthly"
     cooldown:

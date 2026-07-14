@@ -1,14 +1,11 @@
 #!/usr/bin/env bash
 set -e
 
-mkdir -p backend/load/categories
-mkdir -p backend/load/entries_files/revolut
-mkdir -p backend/load/entries_files/santander
-mkdir -p backend/load/entries_files/trading212
-mkdir -p backend/saved_files
+mkdir -p config
+mkdir -p load_data
 
-if [ ! -f backend/load/categories/categories.json ]; then
-    cat > backend/load/categories/categories.json << 'EOF'
+if [ ! -f config/categories.json ]; then
+    cat > config/categories.json << 'EOF'
 {
     "CATEGORIES": {
     },
