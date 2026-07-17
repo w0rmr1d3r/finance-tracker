@@ -32,7 +32,9 @@ FROM python:3.14-slim@sha256:d3400aa122fa42cf0af0dbe8ec3091b047eac5c8f7e3539f713
 RUN apt-get update && \
     apt-get install -y --no-install-recommends nginx supervisor && \
     rm -rf /var/lib/apt/lists/* && \
-    rm -f /etc/nginx/sites-enabled/default
+    rm -f /etc/nginx/sites-enabled/default && \
+    # Remove the login(1) binary from util-linux (CVE-2026-3184) — not needed in a container
+    rm -f /usr/bin/login
 
 WORKDIR /app
 
