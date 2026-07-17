@@ -1,5 +1,5 @@
 # Stage 1: Build frontend (Vite -> dist/)
-FROM node:20-alpine AS frontend-build
+FROM node:20-alpine@sha256:fb4cd12c85ee03686f6af5362a0b0d56d50c58a04632e6c0fb8363f609372293 AS frontend-build
 
 WORKDIR /app
 RUN apk add --no-cache make
@@ -10,11 +10,13 @@ RUN make install
 COPY frontend/ ./
 RUN make build
 
+# Stage 2: Declare uv to be reused later
+FROM ghcr.io/astral-sh/uv:0.11.29@sha256:eb2843a1e56fd9e30c7276ce1a52cba86e64c7b385f5e3279a0e08e02dd058fc AS uv
 
-# Stage 2: Build backend dependencies
-FROM python:3.14-slim AS backend-build
+# Stage 3: Build backend dependencies
+FROM python:3.14-slim@sha256:d3400aa122fa42cf0af0dbe8ec3091b047eac5c8f7e3539f7135e86d855dc015 AS backend-build
 
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
+COPY --from=uv /uv /bin/uv
 
 RUN apt-get update && apt-get install -y --no-install-recommends make && rm -rf /var/lib/apt/lists/*
 
@@ -24,8 +26,8 @@ COPY backend/pyproject.toml backend/uv.lock backend/Makefile ./
 RUN make install
 
 
-# Stage 3: Runtime — nginx + uvicorn under supervisord
-FROM python:3.14-slim
+# Stage 4: Runtime — nginx + uvicorn under supervisord
+FROM python:3.14-slim@sha256:d3400aa122fa42cf0af0dbe8ec3091b047eac5c8f7e3539f7135e86d855dc015
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends nginx supervisor && \
