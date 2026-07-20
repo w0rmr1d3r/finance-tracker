@@ -54,6 +54,7 @@ def trading212_entry() -> Trading212Entry:
         merchant_name="Coffee Shop",
     )
 
+
 @pytest.fixture
 def trading212_entry_time_v2() -> Trading212Entry:
     return Trading212Entry(
