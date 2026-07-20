@@ -46,12 +46,12 @@ def test_trading212_reader_normalizes_dividend_action(reader):
     assert result[0].currency_total == "USD"
 
 
-def test_trading212_reader_skips_entry_with_no_total_or_currency(reader):
+def test_trading212_reader_does_not_skip_entry_with_no_total(reader):
     current_path = pathlib.Path(__file__).parent.resolve()
     path_to_file = f"{current_path}/files/test_trading212_reader_uses_zero_for_empty_total.csv"
     result = reader.read_from_file(path_to_file=path_to_file)
 
-    assert len(result) == 0
+    assert len(result) == 1
 
 
 @pytest.mark.parametrize(

@@ -54,7 +54,8 @@ class Trading212Reader(BaseReader):
                     logger.warning("Empty row found, skipping.")
                     continue
 
-                # In some cases, there are rows without a "total", for which we assign 0.0
+                # In some cases, there are rows without a "total"
+                # for which we assign 0.0 as the new assigned value and warn about it
                 total_str = row[total_col]
                 if not total_str:
                     logger.warning(
