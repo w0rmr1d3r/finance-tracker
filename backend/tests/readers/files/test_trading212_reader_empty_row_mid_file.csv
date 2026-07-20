@@ -1,0 +1,4 @@
+Action,Time,ISIN,Ticker,Name,Shares,Price,Currency(Price),ExchangeRate,Result,Currency(Result),Sub-total,Currency(Sub-total),Total,Currency(Total),FromAccount,ToAccount,ID,Notes,Merchant name
+Card debit,2024-03-15 10:30:00,,,,,,,,,,,,-25.50,EUR,,,,,Coffee Shop
+
+Card debit,2024-03-16 11:00:00,,,,,,,,,,,,-10.00,EUR,,,,,Supermarket
