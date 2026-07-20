@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from datetime import date, datetime
 
-from finance_tracker.constants import DATE_AS_TIME_FORMAT, DATE_FORMAT
+from finance_tracker.constants import DATE_FORMAT
 from finance_tracker.money.currency_codes import CurrencyCodes
 from finance_tracker.money.money import Money
 
@@ -24,13 +24,13 @@ class Trading212Entry:
         """
         return Money(amount=self.total, currency_code=CurrencyCodes[self.currency_total])
 
-    def time_as_date(self) -> date:
+    def _time_as_date(self) -> date:
         """
         Return the time field parsed as a date object.
 
         :return: Date object from time
         """
-        return datetime.strptime(self.time, DATE_AS_TIME_FORMAT).date()
+        return datetime.fromisoformat(self.time).date()
 
     def time_for_entry(self) -> str:
         """
@@ -38,4 +38,4 @@ class Trading212Entry:
 
         :return: Formatted time string
         """
-        return self.time_as_date().strftime(DATE_FORMAT)
+        return self._time_as_date().strftime(DATE_FORMAT)

@@ -53,3 +53,24 @@ def trading212_entry() -> Trading212Entry:
         currency_total="EUR",
         merchant_name="Coffee Shop",
     )
+
+@pytest.fixture
+def trading212_entry_time_v2() -> Trading212Entry:
+    return Trading212Entry(
+        action="Card debit",
+        time="2026-06-15 10:30:00+00:00",
+        total=-25.50,
+        currency_total="EUR",
+        merchant_name="Coffee Shop",
+    )
+
+
+@pytest.fixture
+def trading212_entry_usd() -> Trading212Entry:
+    return Trading212Entry(
+        action="Dividend",
+        time="2024-01-15 09:00:00",
+        total=1.50,
+        currency_total="USD",
+        merchant_name="",
+    )
