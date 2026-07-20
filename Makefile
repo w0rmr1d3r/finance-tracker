@@ -31,7 +31,7 @@ docker-build:
 	docker compose build
 
 docker-run:
-	docker compose up
+	docker compose up --build
 
 .PHONY: install install-dev format lint test lock lock-upgrade \
         frontend-build \
