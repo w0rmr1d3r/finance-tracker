@@ -1,5 +1,7 @@
 services:
   finance-tracker:
+    container_name: finance-tracker
+    image: finance-tracker
     build:
       context: .
       dockerfile: Dockerfile
