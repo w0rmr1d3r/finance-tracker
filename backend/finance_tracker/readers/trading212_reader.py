@@ -14,6 +14,20 @@ class Trading212Reader(BaseReader):
     """
 
     _MERCHANT_COL_NAME = "Merchant name"
+    _TOTAL_COL_NAME = "Total"
+    _ACTION_COL_NAME = "Action"
+    _TIME_COL_NAME = ("Time", "Time (UTC)")
+    _CURRENCY_TOTAL_COL_NAMES = ("Currency (Total)", "Currency(Total)")
+
+    @staticmethod
+    def _find_column_index_by_possible_names(headers: list, *names: str) -> int | None:
+        stripped = [h.strip() for h in headers]
+        for name in names:
+            try:
+                return stripped.index(name)
+            except ValueError:
+                continue
+        return None
 
     def read_from_file(self, path_to_file: str) -> list:
         """
@@ -26,10 +40,13 @@ class Trading212Reader(BaseReader):
         with open(path_to_file, "r", encoding=ENCODING) as file:
             csvreader = csv.reader(file, delimiter=",")
             headers = next(csvreader)
-            merchant_col = next(
-                (i for i, h in enumerate(headers) if h.strip() == self._MERCHANT_COL_NAME),
-                None,
-            )
+
+            # Find the index of the columns that are needed
+            action_col = self._find_column_index_by_possible_names(headers, self._ACTION_COL_NAME)
+            time_col = self._find_column_index_by_possible_names(headers, *self._TIME_COL_NAME)
+            total_col = self._find_column_index_by_possible_names(headers, self._TOTAL_COL_NAME)
+            currency_col = self._find_column_index_by_possible_names(headers, *self._CURRENCY_TOTAL_COL_NAMES)
+            merchant_col = self._find_column_index_by_possible_names(headers, self._MERCHANT_COL_NAME)
 
             for row in csvreader:
                 # If we find an empty row or a new line, we skip it.
@@ -37,7 +54,8 @@ class Trading212Reader(BaseReader):
                     logger.warning("Empty row found, skipping.")
                     continue
 
-                total_str = row[13]
+                # In some cases, there are rows without a "total", for which we assign 0.0
+                total_str = row[total_col]
                 if not total_str:
                     logger.warning(
                         "There's an entry with no total in %s, assigning 0.0 as new total",
@@ -45,7 +63,8 @@ class Trading212Reader(BaseReader):
                     )
                     total_str = "0.0"
 
-                action = row[0]
+                action = row[action_col]
+                # Override action value for any dividend
                 if action.startswith("Dividend"):
                     action = "Dividend"
 
@@ -56,9 +75,9 @@ class Trading212Reader(BaseReader):
                 entries.append(
                     Trading212Entry(
                         action=action,
-                        time=row[1],
+                        time=row[time_col],
                         total=total,
-                        currency_total=row[14],
+                        currency_total=row[currency_col],
                         merchant_name=row[merchant_col] if merchant_col is not None and len(row) > merchant_col else "",
                     )
                 )
