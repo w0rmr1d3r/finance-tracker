@@ -18,6 +18,7 @@ Full-stack web app to track and visualise finances over a year.
 services:
   finance-tracker:
     image: ghcr.io/w0rmr1d3r/finance-tracker:latest
+    container_name: finance-tracker
     ports:
       - "80:80"
     volumes:
