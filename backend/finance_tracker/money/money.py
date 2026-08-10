@@ -23,12 +23,12 @@ class Money:
 
     @property
     def amount(self):
-        """Return the amount value."""
+        """Aamount value."""
         return self._amount
 
     @property
     def currency_code(self):
-        """Return the currency code."""
+        """Currency code."""
         return self._currency_code
 
     def __add__(self, other):
