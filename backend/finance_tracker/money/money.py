@@ -23,7 +23,7 @@ class Money:
 
     @property
     def amount(self):
-        """Aamount value."""
+        """Amount value."""
         return self._amount
 
     @property
