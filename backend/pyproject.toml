@@ -22,6 +22,7 @@ dev = [
 ]
 
 [tool.uv]
+# todo - add minimum version here, to match Dockerfile
 package = false
 # Ignoring this exclude option, as it's not dynamic and needs to be re-sync everytime.
 # The 30d cooldown window is established at the dependabot config instead.

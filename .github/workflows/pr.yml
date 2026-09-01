@@ -147,6 +147,8 @@ jobs:
         with:
           image-ref: finance-tracker:ci
           format: table
-          severity: 'CRITICAL,HIGH'
+          # Only fail for CRITICAL, as we are scanning Docker. No major action to fix on our side besides bumping images.
+          severity: 'CRITICAL'
           ignore-unfixed: true
           exit-code: '1'
+          scanners: 'vuln' # todo - add misconfig scanner

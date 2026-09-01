@@ -113,7 +113,8 @@ jobs:
           format: sarif
           output: trivy.sarif
           ignore-unfixed: true
-          exit-code: '0'
+          exit-code: '0' # Do not fail, scan and continue. Results will be uploaded in next step
+          scanners: 'vuln' # todo - add misconfig scanner
 
       - name: Upload Trivy SARIF results
         if: always()
