@@ -114,6 +114,7 @@ jobs:
           output: trivy.sarif
           ignore-unfixed: true
           exit-code: '0'
+          scanners: 'vuln'
 
       - name: Upload Trivy SARIF results
         if: always()
