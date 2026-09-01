@@ -30,6 +30,7 @@ RUN make install
 FROM python:3.14-slim@sha256:d3400aa122fa42cf0af0dbe8ec3091b047eac5c8f7e3539f7135e86d855dc015
 
 RUN apt-get update && \
+    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends nginx supervisor && \
     rm -rf /var/lib/apt/lists/* && \
     rm -f /etc/nginx/sites-enabled/default
