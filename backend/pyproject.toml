@@ -46,17 +46,17 @@ select = [
 ]
 
 ignore = [
-    "D100", # docstring in public module - does not yet apply
-    "D104", # docstring in public package - does not yet apply
-    "D105", # Missing docstring in magic method
-    "D107", # Missing docstring in `__init__`
-    "D200", # One-line docstring should fit on one line
-    "D203", # incorrect-blank-line-before-class - in favor of D211 no-blank-line-before-class
-    "D205", # 1 blank line required between summary line and description
-    "D212", # multi-line-summary-first-line - in favor of D213 multi-line-summary-second-line
-    "D400", # First line should end with a period
-    "D401", # First line of docstring should be in imperative mood
-    "D415", # First line should end with a period, question mark, or exclamation point
+    "undocumented-public-module",
+    "undocumented-public-package",
+    "undocumented-magic-method",
+    "undocumented-public-init",
+    "unnecessary-multiline-docstring",
+    "incorrect-blank-line-before-class",
+    "missing-blank-line-after-summary",
+    "multi-line-summary-first-line",
+    "missing-trailing-period",
+    "non-imperative-mood",
+    "missing-terminal-punctuation",
 ]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
@@ -66,8 +66,8 @@ preview = true
 [tool.ruff.lint.per-file-ignores]
 "*test*.py" = [
     "D", # ignore all docstring lints in tests
-    "PLR2004", # ignore magic numbers rule in tests
-    "RUF069", # float-equality-comparison
+    "magic-value-comparison",
+    "float-equality-comparison",
 ]
 
 [tool.ruff.format]
