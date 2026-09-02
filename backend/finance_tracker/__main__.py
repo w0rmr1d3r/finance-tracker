@@ -46,7 +46,7 @@ def read_entries_from_load_data(entries):
 class FinanceTrackerEncoder(JSONEncoder):
     """JSON encoder that serialises objects via their __dict__."""
 
-    def default(self, o):  # noqa: PLR6301
+    def default(self, o):  # ruff: ignore[no-self-use]
         """
         Return o.__dict__ for serialisation.
 
