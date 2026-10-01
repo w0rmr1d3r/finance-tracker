@@ -29,6 +29,7 @@ categories:
       - 'javascript'
       - 'python'
       - 'python:uv'
+      - 'docker'
   - title: 'Pipeline bumps'
     labels:
       - 'github_actions'
