@@ -1,0 +1,2 @@
+"datetime","date","account_type","category","type","asset_class","name","symbol","shares","price","amount","fee","tax","currency","original_amount","original_currency","fx_rate","description","transaction_id","counterparty_name","counterparty_iban","payment_reference","mcc_code"
+"2026-08-13T07:57:33.508421Z","2026-08-13","DEFAULT","CASH","DIVIDEND","STOCK","FakeCompany","FakeID2","0.1864620000","","0.040000","","-0.02","EUR","0.05","USD","0.866176","Cash Dividend for ISIN FakeID2","FAKEID","","","",""

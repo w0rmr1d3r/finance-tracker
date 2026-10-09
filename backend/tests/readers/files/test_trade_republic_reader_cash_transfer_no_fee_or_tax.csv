@@ -1,0 +1,2 @@
+"datetime","date","account_type","category","type","asset_class","name","symbol","shares","price","amount","fee","tax","currency","original_amount","original_currency","fx_rate","description","transaction_id","counterparty_name","counterparty_iban","payment_reference","mcc_code"
+"2026-08-02T16:39:31.252329Z","2026-08-02","DEFAULT","CASH","TRANSFER_INSTANT_INBOUND","","YOUR NAME HERE","","","","100.000000","","","EUR","","","","Incoming transfer from YOUR NAME HERE","fake-id","YOUR NAME HERE","FAKE REFERENCE","",""

@@ -1,0 +1,4 @@
+"datetime","date","account_type","category","type","asset_class","name","symbol","shares","price","amount","fee","tax","currency","original_amount","original_currency","fx_rate","description","transaction_id","counterparty_name","counterparty_iban","payment_reference","mcc_code"
+"2026-08-03T07:48:42.436Z","2026-08-03","DEFAULT","TRADING","BUY","STOCK","FakeCompany","FakeID2","0.1864620000","268.1500000000","-50.00","-1.00","","EUR","","","","Buy trade FakeID2 FakeCompany INC., quantity: 0.186462","FAKEID3","","","",""
+
+"2026-09-16T13:57:24.714Z","2026-09-16","DEFAULT","TRADING","SELL","STOCK","FakeCompany","FakeID2","-0.1864620000","288.2000000000","53.74","-1.00","","EUR","","","","Sell trade FakeID2 FakeCompany INC., quantity: 0.186462","FAKEID4","","","",""

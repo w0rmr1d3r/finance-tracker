@@ -2,6 +2,7 @@ from finance_tracker.readers.entry_reader import EntryReader
 from finance_tracker.readers.reader_dispatcher import detect_reader
 from finance_tracker.readers.revolut_reader import RevolutReader
 from finance_tracker.readers.santander_reader import SantanderReader
+from finance_tracker.readers.trade_republic_reader import TradeRepublicReader
 from finance_tracker.readers.trading212_reader import Trading212Reader
 
 
@@ -28,6 +29,15 @@ def test_detect_trading212_header():
         "Currency (French transaction tax)"
     )
     assert isinstance(detect_reader(header), Trading212Reader)
+
+
+def test_detect_traderepublic_header():
+    header = (
+        '"datetime","date","account_type","category","type","asset_class","name","symbol","shares","price",'
+        '"amount","fee","tax","currency","original_amount","original_currency","fx_rate","description",'
+        '"transaction_id","counterparty_name","counterparty_iban","payment_reference","mcc_code"'
+    )
+    assert isinstance(detect_reader(header), TradeRepublicReader)
 
 
 def test_detect_default_header_comma():
