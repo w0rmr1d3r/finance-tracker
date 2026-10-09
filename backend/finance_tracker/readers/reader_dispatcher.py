@@ -5,6 +5,7 @@ from finance_tracker.entries.entry import Entry
 from finance_tracker.readers.entry_reader import EntryReader
 from finance_tracker.readers.revolut_reader import RevolutReader
 from finance_tracker.readers.santander_reader import SantanderReader
+from finance_tracker.readers.trade_republic_reader import TradeRepublicReader
 from finance_tracker.readers.trading212_reader import Trading212Reader
 
 logger = logging.getLogger(__name__)
@@ -30,6 +31,8 @@ def detect_reader(header_line: str):
         return SantanderReader()
     if "Action" in header_line and "Currency (Total)" in header_line:
         return Trading212Reader()
+    if "account_type" in header_line and "transaction_id" in header_line:
+        return TradeRepublicReader()
     if "DATE" in header_line and "TITLE" in header_line:
         return EntryReader()
     return None
@@ -42,6 +45,8 @@ def _convert(reader, raw_entries):
         return [Entry.from_santander_entry(e) for e in raw_entries]
     if isinstance(reader, Trading212Reader):
         return [Entry.from_trading212_entry(e) for e in raw_entries]
+    if isinstance(reader, TradeRepublicReader):
+        return [Entry.from_trade_republic_entry(e) for e in raw_entries]
     return list(raw_entries)
 
 
