@@ -1,6 +1,7 @@
 from datetime import date
 
 from finance_tracker.entries.entry import Entry
+from finance_tracker.entries.trade_republic_entry import TradeRepublicEntry
 from finance_tracker.entries.trading212_entry import Trading212Entry
 from finance_tracker.money.currency_codes import CurrencyCodes
 from finance_tracker.money.money import Money
@@ -70,3 +71,27 @@ def test_entry_from_trading212_non_card_debit_uses_action_as_title():
     assert entry.title == "Dividend"
     assert entry.quantity == Money(amount=1.50, currency_code=CurrencyCodes.USD)
     assert entry.balance == Money(amount=0.0, currency_code=CurrencyCodes.USD)
+
+
+def test_entry_from_trade_republic_entry_uses_type_as_title(trade_republic_entry):
+    entry = Entry.from_trade_republic_entry(trade_republic_entry)
+    assert entry.title == "BUY"
+    assert entry.entry_date == "03/08/2026"
+    assert entry.date_of_action == "03/08/2026"
+    assert entry.quantity == Money(amount=-51.00, currency_code=CurrencyCodes.EUR)
+    assert entry.balance == Money(amount=0.0, currency_code=CurrencyCodes.EUR)
+    assert not entry.other_data
+
+
+def test_entry_from_trade_republic_dividend_entry_combines_amount_and_tax():
+    dividend_entry = TradeRepublicEntry(
+        type="DIVIDEND",
+        datetime="2026-08-13T07:57:33.508421Z",
+        amount=0.04,
+        fee=0.0,
+        tax=-0.02,
+        currency="EUR",
+    )
+    entry = Entry.from_trade_republic_entry(dividend_entry)
+    assert entry.title == "DIVIDEND"
+    assert entry.quantity == Money(amount=0.02, currency_code=CurrencyCodes.EUR)

@@ -4,6 +4,7 @@ import pytest
 
 from finance_tracker.entries.entry import Entry
 from finance_tracker.entries.revolut_entry import RevolutEntry
+from finance_tracker.entries.trade_republic_entry import TradeRepublicEntry
 from finance_tracker.entries.trading212_entry import Trading212Entry
 from finance_tracker.money.money import Money
 
@@ -74,4 +75,28 @@ def trading212_entry_usd() -> Trading212Entry:
         total=1.50,
         currency_total="USD",
         merchant_name="",
+    )
+
+
+@pytest.fixture
+def trade_republic_entry() -> TradeRepublicEntry:
+    return TradeRepublicEntry(
+        type="BUY",
+        datetime="2026-08-03T07:48:42.436Z",
+        amount=-50.00,
+        fee=-1.00,
+        tax=0.0,
+        currency="EUR",
+    )
+
+
+@pytest.fixture
+def trade_republic_entry_dividend() -> TradeRepublicEntry:
+    return TradeRepublicEntry(
+        type="DIVIDEND",
+        datetime="2026-08-13T07:57:33.508421Z",
+        amount=0.04,
+        fee=0.0,
+        tax=-0.02,
+        currency="EUR",
     )

@@ -59,6 +59,16 @@ Action,Time,ISIN,Ticker,Name,Notes,ID,No. of shares,Price / share,Currency (Pric
 Interest on cash,2026-01-01 02:06:08,,,,Interest on cash,...,0.01,EUR,,,,,,
 ```
 
+### TradeRepublic
+
+```csv
+"datetime","date","account_type","category","type","asset_class","name","symbol","shares","price","amount","fee","tax","currency","original_amount","original_currency","fx_rate","description","transaction_id","counterparty_name","counterparty_iban","payment_reference","mcc_code"
+"2026-08-01T00:00:00.000Z","2026-08-01","DEFAULT","TRADING","BUY","STOCK","FakeCompany","FakeID2","0.100000","100.00","-10.00","-1.00","","EUR","","","","Buy trade FakeCompany","fakeid","","","",""
+```
+
+The `amount`, `fee` and `tax` columns are summed to compute the actual cash impact of
+each entry, since TradeRepublic reports them separately.
+
 ### Default (any other bank)
 
 Fallback used when the header doesn't match the formats above. Comma-delimited:
