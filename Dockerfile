@@ -14,7 +14,7 @@ RUN make build
 FROM ghcr.io/astral-sh/uv:0.12.21@sha256:a7aed3216253ee804de3e2d8afa5073baa1a177335345d43845cd4165e43b711 AS uv
 
 # Stage 3: Build backend dependencies
-FROM python:3.14-slim@sha256:51dafde81dbdb6ebde285137a295cf18a47ca95234fe388a343719cb97305b3d AS backend-build
+FROM python:3.14-slim@sha256:cd89c30eda26ee911a4611b18680086e0ea42e6f5f8cbe653d07fa7958c9cec8 AS backend-build
 
 COPY --from=uv /uv /bin/uv
 
@@ -27,7 +27,7 @@ RUN make install
 
 
 # Stage 4: Runtime — nginx + uvicorn under supervisord
-FROM python:3.14-slim@sha256:51dafde81dbdb6ebde285137a295cf18a47ca95234fe388a343719cb97305b3d
+FROM python:3.14-slim@sha256:cd89c30eda26ee911a4611b18680086e0ea42e6f5f8cbe653d07fa7958c9cec8
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends nginx supervisor && \
